@@ -8,9 +8,11 @@ namespace WebApplication2.Data
         public UserDbContext(DbContextOptions<UserDbContext> options): base(options) { }
 
         //public DbSet<User> Users { get; set; }
+        public DbSet<Product> Products { get; set; }
 
         public DbSet<User> Users => Set<User>();
 
-        
     }
+
+   
 }

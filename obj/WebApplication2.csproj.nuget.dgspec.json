@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\ICEP-INTERN\\source\\repos\\WebApplication2\\WebApplication2\\WebApplication2.csproj": {}
+    "C:\\Users\\ICEP-INTERN\\source\\repos\\WebApplication2\\WebApplication2\\Buffet-Food-Redistribution-Server\\WebApplication2.csproj": {}
   },
   "projects": {
-    "C:\\Users\\ICEP-INTERN\\source\\repos\\WebApplication2\\WebApplication2\\WebApplication2.csproj": {
+    "C:\\Users\\ICEP-INTERN\\source\\repos\\WebApplication2\\WebApplication2\\Buffet-Food-Redistribution-Server\\WebApplication2.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\ICEP-INTERN\\source\\repos\\WebApplication2\\WebApplication2\\WebApplication2.csproj",
+        "projectUniqueName": "C:\\Users\\ICEP-INTERN\\source\\repos\\WebApplication2\\WebApplication2\\Buffet-Food-Redistribution-Server\\WebApplication2.csproj",
         "projectName": "WebApplication2",
-        "projectPath": "C:\\Users\\ICEP-INTERN\\source\\repos\\WebApplication2\\WebApplication2\\WebApplication2.csproj",
+        "projectPath": "C:\\Users\\ICEP-INTERN\\source\\repos\\WebApplication2\\WebApplication2\\Buffet-Food-Redistribution-Server\\WebApplication2.csproj",
         "packagesPath": "C:\\Users\\ICEP-INTERN\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\ICEP-INTERN\\source\\repos\\WebApplication2\\WebApplication2\\obj\\",
+        "outputPath": "C:\\Users\\ICEP-INTERN\\source\\repos\\WebApplication2\\WebApplication2\\Buffet-Food-Redistribution-Server\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
