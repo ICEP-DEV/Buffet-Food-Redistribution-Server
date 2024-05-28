@@ -1,0 +1,17 @@
+{
+  "version": 2,
+  "dgSpecHash": "lP4sfrUOeau5uslb0SYseM3pp0VoTMfr3EG9C065CWDBxfnRD1Q0Mf4CCbfXhYNArcamLii0RvSdSihbEA58Rg==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\ICEP-INTERN\\Documents\\FoodShareNetwork222\\Application\\Application.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\ICEP-INTERN\\.nuget\\packages\\elasticsearch.net\\7.17.5\\elasticsearch.net.7.17.5.nupkg.sha512",
+    "C:\\Users\\ICEP-INTERN\\.nuget\\packages\\microsoft.aspnetcore.http.features\\5.0.17\\microsoft.aspnetcore.http.features.5.0.17.nupkg.sha512",
+    "C:\\Users\\ICEP-INTERN\\.nuget\\packages\\microsoft.csharp\\4.6.0\\microsoft.csharp.4.6.0.nupkg.sha512",
+    "C:\\Users\\ICEP-INTERN\\.nuget\\packages\\microsoft.extensions.primitives\\5.0.1\\microsoft.extensions.primitives.5.0.1.nupkg.sha512",
+    "C:\\Users\\ICEP-INTERN\\.nuget\\packages\\nest\\7.17.5\\nest.7.17.5.nupkg.sha512",
+    "C:\\Users\\ICEP-INTERN\\.nuget\\packages\\system.buffers\\4.5.1\\system.buffers.4.5.1.nupkg.sha512",
+    "C:\\Users\\ICEP-INTERN\\.nuget\\packages\\system.diagnostics.diagnosticsource\\5.0.0\\system.diagnostics.diagnosticsource.5.0.0.nupkg.sha512",
+    "C:\\Users\\ICEP-INTERN\\.nuget\\packages\\system.io.pipelines\\5.0.2\\system.io.pipelines.5.0.2.nupkg.sha512"
+  ],
+  "logs": []
+}
