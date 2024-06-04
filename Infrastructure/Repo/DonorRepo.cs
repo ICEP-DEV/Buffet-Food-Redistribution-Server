@@ -51,22 +51,25 @@ namespace Infrastructure.Repo
             var getUser = await FindUserByEmail(donorDTO.DonorEmail!);
             if (getUser != null)
                 return new RegistrationResponse(false, "User already exist");
-
-            appDbContext.Donors.Add(new Donor()
+            else
             {
-                DonorName = donorDTO.DonorName,
-                DonorEmail = donorDTO.DonorEmail,
-                DonorAddress = donorDTO.DonorAddress,
-                DonorPhoneNum = donorDTO.DonorPhoneNum,
-                Password = BCrypt.Net.BCrypt.HashPassword(donorDTO.Password)
-            });
-            await appDbContext.SaveChangesAsync();
+                appDbContext.Donors.Add(new Donor()
+                {
+                    DonorName = donorDTO.DonorName,
+                    DonorEmail = donorDTO.DonorEmail,
+                    DonorAddress = donorDTO.DonorAddress,
+                    DonorPhoneNum = donorDTO.DonorPhoneNum,
+                    Password = BCrypt.Net.BCrypt.HashPassword(donorDTO.Password)
+                });
+                await appDbContext.SaveChangesAsync();
+            }
+            
             return new RegistrationResponse(true, "Registration completed");
         }
        
         public async Task<Donor> GetDonorByEmail(string email)
         {
-            var result =  appDbContext.Donors.FirstOrDefault(u => u.DonorEmail == email); ;
+            var result = appDbContext.Donors.FirstOrDefault(u => u.DonorEmail == email); ;
 
             return result;
         }

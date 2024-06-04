@@ -9,7 +9,7 @@ namespace Application.Contracts
 {
     public interface IFoodItem
     {
-        bool AddFoodItem(FoodItem item);
+        bool AddFoodItem(FoodItem item, string imagePath);
         Task<IEnumerable<FoodItem>> GetFoodItemsAsync();
     }
 }

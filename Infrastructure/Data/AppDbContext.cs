@@ -10,7 +10,7 @@ namespace Infrastructure.Data
         
         }
 
-        public DbSet<User> Users { get; set; }
+       
         public DbSet<Donor> Donors { get; set; }
         public DbSet<FoodDonation>FoodDonations { get; set; }
         public DbSet<Recipient> Recipients { get; set; }

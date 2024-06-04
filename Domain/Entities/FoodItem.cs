@@ -23,8 +23,8 @@ namespace Domain.Entities
         public string ItemImage { get; set; } = string.Empty;
 
 
-        [NotMapped]
 
+        [NotMapped]
         public IFormFile? ImageFile { get; set; } 
         
     }

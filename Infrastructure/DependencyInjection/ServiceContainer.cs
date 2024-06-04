@@ -35,7 +35,8 @@ namespace Infrastructure.DependencyInjection
                     (Encoding.UTF8.GetBytes(configuration["Jwt:Key"]!))
                 };
             });
-            services.AddScoped<IUser, UserRepo>();
+            
+            
             services.AddScoped<IDonor, DonorRepo>();
             services.AddScoped<IRecipient, RecipientRepo>();
             services.AddScoped<IFileUploading, FileUploadRepo>();

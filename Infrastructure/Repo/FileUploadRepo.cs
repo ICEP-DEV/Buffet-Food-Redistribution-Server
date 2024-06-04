@@ -1,4 +1,5 @@
 ﻿using Application.Contracts;
+using Domain.Entities;
 using Infrastructure.Data;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -13,10 +14,11 @@ namespace Infrastructure.Repo
         public FileUploadRepo(IWebHostEnvironment env, AppDbContext appDbContext)
         {
             this.environment = env;
+            this._appDbContext = appDbContext;
             
         }
 
-        public Tuple<int, string> SaveImage(IFormFile imageFile)
+        public async Task<Tuple<int, string>> SaveImage(IFormFile imageFile)
         {
             try
             {
@@ -48,7 +50,14 @@ namespace Infrastructure.Repo
                 var stream = new FileStream(fileWithPath, FileMode.Create);
                 imageFile.CopyTo(stream);
                 stream.Close();
+
+                
+
+
                 return new Tuple <int, string> ( 0, newFileName );
+                
+                 
+
             }
             catch(Exception ex ) 
             {

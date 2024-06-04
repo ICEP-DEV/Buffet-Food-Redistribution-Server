@@ -28,7 +28,7 @@ namespace FoodShareAPI.Controllers
 
         [HttpPost("register")]
 
-        public async Task<ActionResult<LoginResponse>> RegisterUser(DonorDTO registerDTO)
+        public async Task<ActionResult<LoginResponse>> RegisterUser([FromBody] DonorDTO registerDTO)
         {
             var result = await donor.RegisterDonorAsync(registerDTO);
             return Ok(result);

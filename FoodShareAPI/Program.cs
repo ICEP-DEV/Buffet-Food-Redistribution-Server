@@ -18,7 +18,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.InfrastructureServices(builder.Configuration);
 
 
-
+// FoodShare 
 builder.Services.AddCors(options =>
 {
     options.AddPolicy(name: "FoodShareNetwork", configurePolicy: policyBuilder =>

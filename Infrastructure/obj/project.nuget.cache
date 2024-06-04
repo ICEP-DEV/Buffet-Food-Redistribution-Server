@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "IJ5K4X8oPeH3Z0X0UGO7J8DVCNuzTaMLYyjeMypQHJXk13KXtNJuceX8SxA4QMzKsWoLkWomTNPdnNfum+4V0Q==",
+  "dgSpecHash": "7P0n4QWpFpB4UVucxju5/8RtUJtJwFBOTtFS+DsVbBUJTVjMmTagnNn4xp8zB9rCTCCSTWNtDhpMlVClcZC7wg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\ICEP-INTERN\\Documents\\FoodShareNetwork222\\Infrastructure\\Infrastructure.csproj",
+  "projectFilePath": "C:\\Users\\ICEP-INTERN\\Documents\\FoodShareNetwork222\\Buffet-Food-Redistribution-Server\\Infrastructure\\Infrastructure.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\ICEP-INTERN\\.nuget\\packages\\azure.core\\1.35.0\\azure.core.1.35.0.nupkg.sha512",
     "C:\\Users\\ICEP-INTERN\\.nuget\\packages\\azure.identity\\1.10.3\\azure.identity.1.10.3.nupkg.sha512",

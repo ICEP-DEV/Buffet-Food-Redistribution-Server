@@ -9,7 +9,7 @@ namespace Application.Contracts
 {
     public interface IFileUploading
     {
-        public Tuple<int, string> SaveImage(IFormFile imageFile);
+        public Task<Tuple<int, string>> SaveImage(IFormFile imageFile);
 
         public bool DeleteImage(string imageFileName);
 

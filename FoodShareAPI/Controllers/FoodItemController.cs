@@ -24,7 +24,7 @@ namespace FoodShareAPI.Controllers
 
         [HttpPost("AddItem")]
 
-        public IActionResult AddFoodItem(FoodItem item) 
+        public async Task<IActionResult> AddFoodItem(FoodItem item) 
         {
             var status = new ItemDTO();
 
@@ -37,23 +37,33 @@ namespace FoodShareAPI.Controllers
 
             if(item.ImageFile != null)
             {
-                var fileResult = _fileUpload.SaveImage(item.ImageFile);
-                if(fileResult.Item1 == 1)
+                var fileResult = await _fileUpload.SaveImage(item.ImageFile);
+
+                if(fileResult.Item1 == 0)
                 {
-                    item.ItemImage = fileResult.Item2;
+                   
+
+                    var productResult = _foodItem.AddFoodItem(item,fileResult.Item2);
+                    if (productResult)
+                    {
+                        status.StatusCode = 1;
+                        status.Message = "Item added successfully";
+                    }
+                    else
+                    {
+                        status.StatusCode = 0;
+                        status.Message = "Error adding product";
+                    }
                 }
 
-                var productResult = _foodItem.AddFoodItem(item);
-                if(productResult)
-                {
-                    status.StatusCode = 1;
-                    status.Message = "Item added successfully";
-                }
                 else
                 {
                     status.StatusCode = 0;
-                    status.Message = "Error adding product";
+                    status.Message = fileResult.Item2;
+                    return Ok(status);
                 }
+
+              
                 
             }
 

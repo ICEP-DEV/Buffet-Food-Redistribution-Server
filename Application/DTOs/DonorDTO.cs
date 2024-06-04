@@ -11,7 +11,7 @@ namespace Application.DTOs
     {
         public string DonorName { get; set; } = string.Empty;
 
-        [EmailAddress]
+        
         public string DonorEmail { get; set; } = string.Empty;
 
         public string DonorPhoneNum { get; set; } = string.Empty;
