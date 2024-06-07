@@ -5,6 +5,9 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections;
 using System.Reflection.Metadata.Ecma335;
+using Azure.Core;
+using Microsoft.AspNetCore.Authorization;
+using System.Security.Claims;
 
 namespace FoodShareAPI.Controllers
 {
@@ -12,73 +15,69 @@ namespace FoodShareAPI.Controllers
     [ApiController]
     public class FoodItemController : ControllerBase
     {
-        private IFileUploading _fileUpload;
+        //private IFileUploading _fileUpload;
         private readonly IFoodItem _foodItem;
 
-        public FoodItemController(IFileUploading fileUploading, IFoodItem foodItem) 
-        { 
-           this._fileUpload = fileUploading;
+        public FoodItemController( IFoodItem foodItem)
+        {
+            //this._fileUpload = fileUploading;
             this._foodItem = foodItem;
         }
 
 
-        [HttpPost("AddItem")]
-
-        public async Task<IActionResult> AddFoodItem(FoodItem item) 
+        [HttpPost]
+        
+        public async Task<IActionResult> AddFoodItem(FoodItem foodItem)
         {
-            var status = new ItemDTO();
 
-            if(!ModelState.IsValid)
-            {
-                status.StatusCode = 0;
-                status.Message = "Please enter valid data";
-                return Ok(status);
-            }
-
-            if(item.ImageFile != null)
-            {
-                var fileResult = await _fileUpload.SaveImage(item.ImageFile);
-
-                if(fileResult.Item1 == 0)
-                {
-                   
-
-                    var productResult = _foodItem.AddFoodItem(item,fileResult.Item2);
-                    if (productResult)
-                    {
-                        status.StatusCode = 1;
-                        status.Message = "Item added successfully";
-                    }
-                    else
-                    {
-                        status.StatusCode = 0;
-                        status.Message = "Error adding product";
-                    }
-                }
-
-                else
-                {
-                    status.StatusCode = 0;
-                    status.Message = fileResult.Item2;
-                    return Ok(status);
-                }
-
-              
-                
-            }
-
-            return Ok(status);
+            await _foodItem.AddFoodItemsAsync(foodItem);
+            return Ok("Food item added successfully");
         }
 
 
-        [HttpGet("GetImage")]
 
-        public async Task <IEnumerable> GetFoodItemAsync()
+
+       // [HttpPost("AddItem")]
+        /*public async Task<IActionResult> AddFoodItem([FromBody] FoodItem item)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            //var imagePath = await _fileUpload.SaveImage(item.ImageFile);
+          
+
+            var foodItemId = await _foodItem.AddFoodItemAsync(new FoodItem
+            {
+                ItemName = item.ItemName,
+                Quantity = item.Quantity,
+                DateCooked = item.DateCooked,
+                Description = item.Description,
+                Address = item.Address
+              //  ItemImage = imagePath
+                
+            });
+
+            if (foodItemId > 0)
+            {
+                return Ok(new { FoodItemId = foodItemId });
+            }
+            else
+            {
+                return StatusCode(500, "Error adding food item to the database.");
+            }
+        }*/
+
+        [HttpGet]
+        public async Task<IEnumerable> GetFoodItemAsync()
         {
             var result = await _foodItem.GetFoodItemsAsync();
 
             return result;
+
         }
-        
+
     }
+    
 }

@@ -48,17 +48,16 @@ namespace Infrastructure.Migrations
                 name: "FoodDonations",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
+                    DonationId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     DonorId = table.Column<int>(type: "int", nullable: false),
-                    RecipientId = table.Column<int>(type: "int", nullable: false),
                     ItemId = table.Column<int>(type: "int", nullable: false),
-                    DateCooked = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Quantity = table.Column<int>(type: "int", nullable: false)
+                    Quantity = table.Column<int>(type: "int", nullable: false),
+                    DateCooked = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_FoodDonations", x => x.Id);
+                    table.PrimaryKey("PK_FoodDonations", x => x.DonationId);
                 });
 
             migrationBuilder.CreateTable(
@@ -71,7 +70,7 @@ namespace Infrastructure.Migrations
                     Quantity = table.Column<int>(type: "int", nullable: false),
                     DateCooked = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ItemImage = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Address = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -84,7 +83,6 @@ namespace Infrastructure.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    AdminId = table.Column<int>(type: "int", nullable: false),
                     RecipientName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     RecipientEmail = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     RecipientPhoneNum = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -94,24 +92,15 @@ namespace Infrastructure.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Recipients", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Recipients_Admin_AdminId",
-                        column: x => x.AdminId,
-                        principalTable: "Admin",
-                        principalColumn: "AdminId",
-                        onDelete: ReferentialAction.Cascade);
                 });
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Recipients_AdminId",
-                table: "Recipients",
-                column: "AdminId",
-                unique: true);
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "Admin");
+
             migrationBuilder.DropTable(
                 name: "Donors");
 
@@ -123,9 +112,6 @@ namespace Infrastructure.Migrations
 
             migrationBuilder.DropTable(
                 name: "Recipients");
-
-            migrationBuilder.DropTable(
-                name: "Admin");
         }
     }
 }

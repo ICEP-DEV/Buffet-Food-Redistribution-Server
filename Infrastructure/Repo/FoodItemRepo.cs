@@ -3,6 +3,7 @@ using Domain.Entities;
 using Infrastructure.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Nest;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,12 +16,13 @@ namespace Infrastructure.Repo
     {
 
         private readonly AppDbContext _appDbContext;
-
+        
         public FoodItemRepo(AppDbContext appDbContext)
         {
             this._appDbContext = appDbContext;
+           
         }
-        public bool AddFoodItem(FoodItem item, string imagePath)
+        /*public bool AddFoodItem(FoodItem item, string imagePath)
         {
             
             try
@@ -40,7 +42,21 @@ namespace Infrastructure.Repo
             {
                 return false;
             }   
+        }*/
+
+        //Authorized users add food items
+        public async Task AddFoodItemsAsync(FoodItem foodItem)
+        {
+            _appDbContext.FoodItems.Add(foodItem);
+            await _appDbContext.SaveChangesAsync();
         }
+
+        /*public async Task<int> AddFoodItemAsync(FoodItem foodItem)
+        {
+           _appDbContext.FoodItems.Add(foodItem);
+            await _appDbContext.SaveChangesAsync();
+            return foodItem.Id;
+        }*/
 
         public async Task<IEnumerable<FoodItem>> GetFoodItemsAsync()
         {

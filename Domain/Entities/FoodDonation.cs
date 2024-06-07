@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
@@ -9,33 +10,28 @@ namespace Domain.Entities
 {
     public class FoodDonation
     {
+        [Key]
+        public int DonationId { get; set; }
 
-        public int Id { get; set; }
-
-        [ForeignKey("Donors") ]
+        [ForeignKey("Donor") ]
         public int DonorId { get; set; }
 
-        [ForeignKey("Recipients")]
-        public int RecipientId { get; set; }
-
-        [ForeignKey("FoodItems")]
+        [ForeignKey("FoodItem")]
         public int ItemId { get; set; }
 
-        [ForeignKey("FoodItems")]
+        public int Quantity { get; set; }
         public DateTime DateCooked { get; set; }
 
-        [ForeignKey("FoodItems")]
-        public int Quantity { get; set; }
 
-        
+
 
         /*[ForeignKey("FoodItems")]
         public string ItemName { get; set; } = string.Empty;*/
 
 
-      
-        
-      
+
+
+
 
 
 

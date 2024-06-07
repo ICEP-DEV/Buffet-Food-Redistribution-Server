@@ -7,6 +7,8 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Application.Contracts;
 using Infrastructure.Repo;
+using Nest;
+using Domain.Entities;
 namespace Infrastructure.DependencyInjection
 {
     public static class ServiceContainer
@@ -35,13 +37,14 @@ namespace Infrastructure.DependencyInjection
                     (Encoding.UTF8.GetBytes(configuration["Jwt:Key"]!))
                 };
             });
-            
-            
+
+            services.AddHttpContextAccessor();
             services.AddScoped<IDonor, DonorRepo>();
             services.AddScoped<IRecipient, RecipientRepo>();
-            services.AddScoped<IFileUploading, FileUploadRepo>();
+           // services.AddScoped<IFileUploading, FileUploadRepo>();
             services.AddScoped<IFoodItem, FoodItemRepo>();
-
+            services.AddScoped<IFoodDonation, DonationsRepo>();
+            services.AddScoped<ICustomAuthentication, AuthenticationRepo>();
             return services;
         }
         

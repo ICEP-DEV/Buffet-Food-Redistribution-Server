@@ -86,11 +86,11 @@ namespace Infrastructure.Migrations
 
             modelBuilder.Entity("Domain.Entities.FoodDonation", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("DonationId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("DonationId"));
 
                     b.Property<DateTime>("DateCooked")
                         .HasColumnType("datetime2");
@@ -104,10 +104,7 @@ namespace Infrastructure.Migrations
                     b.Property<int>("Quantity")
                         .HasColumnType("int");
 
-                    b.Property<int>("RecipientId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
+                    b.HasKey("DonationId");
 
                     b.ToTable("FoodDonations");
                 });
@@ -120,14 +117,14 @@ namespace Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<string>("Address")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<DateTime>("DateCooked")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ItemImage")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -151,9 +148,6 @@ namespace Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("AdminId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Password")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -176,26 +170,7 @@ namespace Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("AdminId")
-                        .IsUnique();
-
                     b.ToTable("Recipients");
-                });
-
-            modelBuilder.Entity("Domain.Entities.Recipient", b =>
-                {
-                    b.HasOne("Domain.Entities.Admin", "Admin")
-                        .WithOne("Recipient")
-                        .HasForeignKey("Domain.Entities.Recipient", "AdminId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Admin");
-                });
-
-            modelBuilder.Entity("Domain.Entities.Admin", b =>
-                {
-                    b.Navigation("Recipient");
                 });
 #pragma warning restore 612, 618
         }

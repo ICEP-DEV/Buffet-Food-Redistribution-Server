@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace Application.Contracts
 {
-    public interface IFileUploading
+   /* public interface IFileUploading
     {
-        public Task<Tuple<int, string>> SaveImage(IFormFile imageFile);
+         Task< string> SaveImage(IFormFile imageFile);
 
         public bool DeleteImage(string imageFileName);
 
-    }
+    }*/
 }

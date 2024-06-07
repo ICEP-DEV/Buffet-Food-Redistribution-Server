@@ -12,12 +12,6 @@ namespace Domain.Entities
     public class Recipient
     {
         public int Id { get; set; }
-
-
-        [ForeignKey("Admin")]
-
-        public int AdminId { get; set; }
-
         public string RecipientName { get; set; } = string.Empty;
 
         public string RecipientEmail { get; set; } = string.Empty;
@@ -29,6 +23,6 @@ namespace Domain.Entities
         public string Password { get; set; } = string.Empty;
 
         
-        public virtual Admin? Admin { get; set; }
+       
     }
 }
