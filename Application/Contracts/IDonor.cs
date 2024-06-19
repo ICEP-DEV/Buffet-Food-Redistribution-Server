@@ -1,5 +1,6 @@
 ﻿using Application.DTOs;
 using Domain.Entities;
+using Nest;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,9 +19,12 @@ namespace Application.Contracts
 
         Task<List<Donor>> GetDonorListAsync();
 
-        Task<int> UpdateDonorAsync(int id, Donor donor);
+        Task<int> UpdateDonorAsync( Donor donor);
 
         Task<int> DeleteDonorAsync(int id);
 
+        Task<Donor> GetDonorProfile();
+
+        //Task<IAction> GetCurrentUser(int id);
     }
 }

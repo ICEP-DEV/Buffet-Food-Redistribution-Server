@@ -1,8 +1,10 @@
 ﻿using Application.Contracts;
 using Application.DTOs;
 using Domain.Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Runtime.Intrinsics.X86;
 
 namespace FoodShareAPI.Controllers
 {
@@ -48,17 +50,48 @@ namespace FoodShareAPI.Controllers
             return donor.GetDonorByEmail(email);
         }
 
-        [HttpPut("{id}")]
-        public async Task<int> UpdateDonorAsync(int id, Donor _donor)
+        [HttpPut]
+        [Authorize]
+        public async Task<IActionResult> UpdateDonorAsync(Donor _donor)
         {
-            return await donor.UpdateDonorAsync(id, _donor);
+
+          var result = await donor.UpdateDonorAsync(_donor);
+
+            if(result > 0)
+            {
+                return Ok(new { Message = "Donor profile updated successfully.", RowsAffected = result });
+            }
+            else
+            {
+                return NotFound(); // Donor with the specified ID not found
+            }
+
+
+            // return await donor.UpdateDonorAsync( _donor);
         }
 
-        [HttpDelete("{id}")]
-
+        [HttpDelete]
+        
         public async Task<int> DeleteDonorAsync(int id)
         {
             return await donor.DeleteDonorAsync(id);
+        }
+
+        [HttpGet ("Profile")]
+        
+        
+        public async Task <ActionResult<Donor>> GetDonorProfile()
+        {
+            var donorProfile = await donor.GetDonorProfile();
+
+            if (donorProfile != null)
+            {
+                return Ok(donorProfile); // Return 200 OK with the donor profile
+            }
+            else
+            {
+                return NotFound(); // Return 404 Not Found if donor profile not found
+            }
         }
     }
 }

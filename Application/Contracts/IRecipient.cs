@@ -21,5 +21,10 @@ namespace Application.Contracts
         Task<int> UpdateRecipientAsync(int id, Recipient recipient);
 
         Task <int> DeleteRecipientAsync(int id);
+        Task<Recipient> GetRecipientProfile();
+
+        // Receive donation interface 
+
+        
     }
 }

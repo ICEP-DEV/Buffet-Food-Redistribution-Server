@@ -2,12 +2,11 @@
 using Application.DTOs;
 using Domain.Entities;
 using Infrastructure.Data;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Security.Claims;
+
 
 namespace Infrastructure.Repo
 {
@@ -15,71 +14,70 @@ namespace Infrastructure.Repo
     {
         
         private readonly AppDbContext _appDbContext;
-      
+        private readonly IHttpContextAccessor _httpContextAccessor;
 
-        public DonationsRepo( AppDbContext appDbContext)
+
+        public DonationsRepo(AppDbContext appDbContext, IHttpContextAccessor httpContextAccessor)
         {
-            
+
             this._appDbContext = appDbContext;
-            
+            _httpContextAccessor = httpContextAccessor;
         }
 
-        /* public async Task AddFoodDonationAsync(int donorId, int foodItemId, int quantity, DateTime dateCooked)
-          {
-              var foodDonation = new FoodDonation
-              {
-                  DonorId = donorId,
-                  ItemId = foodItemId,
-                  Quantity = quantity,
-                  DateCooked = dateCooked
-              };
-
-              await _appDbContext.AddAsync(foodDonation);
-
-          }*/
 
 
 
-
-        public void PopulateFoodDonations(int donorId, IEnumerable<FoodItem> foodItems)
+        public void PopulateFoodDonations(FoodItem foodItems)
         {
-            var donor = _appDbContext.Donors.FirstOrDefault(d => d.DonorId == donorId);
+            var donorIdClaim = _httpContextAccessor.HttpContext.User.FindFirst("DonorId");
 
-            if (donor == null)
+            // Check if the claim exists and if its value can be parsed as an integer
+            if (donorIdClaim != null && int.TryParse(donorIdClaim.Value, out int donorId))
             {
-                // Handle the case where donor is not found
-                // For example, throw an exception or return an error message
-                throw new ArgumentException("Donor not found.", nameof(donorId));
-            }
+                // The value of the claim has been successfully parsed as an integer
+                foodItems.DateCooked = DateTime.Now;
+                _appDbContext.FoodItems.Add(foodItems);
+                _appDbContext.SaveChanges();
 
-            var foodItemsList = foodItems.ToList(); // Materialize the foodItems collection to avoid multiple database calls
-
-            foreach (var foodItem in foodItemsList)
-            {
-                // Create a new FoodDonation entity instance
                 var foodDonation = new FoodDonation
                 {
+                    DateCooked = DateTime.Now,
                     DonorId = donorId,
-                    ItemId = foodItem.Id,
-                    Quantity = foodItem.Quantity,
-                    DateCooked = foodItem.DateCooked
+                    ItemId = foodItems.Id,
+                    Quantity = foodItems.Quantity,
                 };
 
-                // Add the new FoodDonation entity instance to the FoodDonations table
                 _appDbContext.FoodDonations.Add(foodDonation);
+                _appDbContext.SaveChanges();
             }
+            else
+            {
+                // Handle the case where the "DonorId" claim is not found or its value cannot be parsed as an integer
+                // You may want to log an error, return a specific HTTP response, or take other appropriate action
 
-            // Save changes to the database
-            _appDbContext.SaveChanges();
+            }
         }
 
-        
-
-
-        public async Task<IEnumerable<FoodDonationDTO>> GetDonationsForDonorAsync(int donorId)
+        public async Task<List<FoodDonationDTO>> GetDonationsForDonorAsync()
         {
             try
             {
+                var donorIdClaim = _httpContextAccessor.HttpContext.User.FindFirst("DonorId");
+
+                if (donorIdClaim == null)
+                {
+                    throw new InvalidOperationException("User's donor ID not found in claims.");
+                }
+
+                // Retrieve the donorId as a string
+                var donorIdString = donorIdClaim.Value;
+
+                // Convert donorIdString to int
+                if (!int.TryParse(donorIdString, out int donorId))
+                {
+                    throw new InvalidOperationException("Unable to parse donor ID as integer.");
+                }
+
                 var donations = await (from donation in _appDbContext.FoodDonations
                                        where donation.DonorId == donorId
                                        join foodItem in _appDbContext.FoodItems on donation.ItemId equals foodItem.Id
@@ -95,13 +93,17 @@ namespace Infrastructure.Repo
             }
             catch (Exception ex)
             {
-                // Log the exception
-                // You can log the exception using a logging framework like Serilog, NLog, etc.
-                // Also, you can throw or return the exception depending on your application's error handling strategy.
-                throw new Exception("An error occurred while retrieving donations for the donor.", ex);
+                // Log the exception for debugging purposes
+                Console.WriteLine($"An error occurred while retrieving donations for the donor: {ex}");
+
+                // Rethrow the exception wrapped in a new exception with a more descriptive message
+                throw new Exception("An error occurred while retrieving donations for the donor. See inner exception for details.", ex);
             }
         }
-            public IEnumerable<FoodDonationDTO> GetDonationsAsync()
+
+
+         public IEnumerable<FoodDonationDTO> GetDonationsAsync()
+        
         {
             var donations = (from donation in _appDbContext.FoodDonations
                              join donor in _appDbContext.Donors on donation.DonorId equals donor.DonorId

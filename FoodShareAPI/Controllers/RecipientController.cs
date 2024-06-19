@@ -1,8 +1,10 @@
 ﻿using Application.Contracts;
 using Application.DTOs;
 using Domain.Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Runtime.CompilerServices;
 
 namespace FoodShareAPI.Controllers
 {
@@ -60,5 +62,25 @@ namespace FoodShareAPI.Controllers
         {
             return await recipient.DeleteRecipientAsync(id);
         }
+
+        [HttpGet("Profile")]
+        
+
+        public async Task <ActionResult<Recipient>> GetRecipientProfile()
+        {
+            var recipientProfile = await recipient.GetRecipientProfile();
+
+            if(recipientProfile == null)
+            {
+                return NotFound();
+            }
+            else
+            {
+                return Ok(recipientProfile);
+            }
+
+
+        }
+
     }
 }
