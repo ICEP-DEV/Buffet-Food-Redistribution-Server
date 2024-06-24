@@ -9,6 +9,7 @@ using Application.Contracts;
 using Infrastructure.Repo;
 using Nest;
 using Domain.Entities;
+using Application.DTOs;
 namespace Infrastructure.DependencyInjection
 {
     public static class ServiceContainer
@@ -38,6 +39,8 @@ namespace Infrastructure.DependencyInjection
                 };
             });
 
+            
+
             services.AddHttpContextAccessor();
             services.AddScoped<IDonor, DonorRepo>();
             services.AddScoped<IRecipient, RecipientRepo>();
@@ -45,6 +48,8 @@ namespace Infrastructure.DependencyInjection
             services.AddScoped<IFoodItem, FoodItemRepo>();
             services.AddScoped<IFoodDonation, DonationsRepo>();
             services.AddScoped<ICustomAuthentication, AuthenticationRepo>();
+            services.AddScoped<IEmail,EmailRepo>();
+
             return services;
         }
         

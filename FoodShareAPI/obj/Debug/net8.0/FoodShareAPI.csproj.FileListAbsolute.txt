@@ -291,3 +291,17 @@ C:\Users\ICEP-INTERN\Documents\FoodShareNetwork222\Buffet-Food-Redistribution-Se
 C:\Users\ICEP-INTERN\Documents\FoodShareNetwork222\Buffet-Food-Redistribution-Server\FoodShareAPI\obj\Debug\net8.0\FoodShareAPI.pdb
 C:\Users\ICEP-INTERN\Documents\FoodShareNetwork222\Buffet-Food-Redistribution-Server\FoodShareAPI\obj\Debug\net8.0\FoodShareAPI.genruntimeconfig.cache
 C:\Users\ICEP-INTERN\Documents\FoodShareNetwork222\Buffet-Food-Redistribution-Server\FoodShareAPI\obj\Debug\net8.0\ref\FoodShareAPI.dll
+C:\Users\ICEP-INTERN\Documents\FoodShareNetwork222\Buffet-Food-Redistribution-Server\FoodShareAPI\bin\Debug\net8.0\Microsoft.AspNetCore.Connections.Abstractions.dll
+C:\Users\ICEP-INTERN\Documents\FoodShareNetwork222\Buffet-Food-Redistribution-Server\FoodShareAPI\bin\Debug\net8.0\Microsoft.AspNetCore.Http.Connections.Client.dll
+C:\Users\ICEP-INTERN\Documents\FoodShareNetwork222\Buffet-Food-Redistribution-Server\FoodShareAPI\bin\Debug\net8.0\Microsoft.AspNetCore.Http.Connections.Common.dll
+C:\Users\ICEP-INTERN\Documents\FoodShareNetwork222\Buffet-Food-Redistribution-Server\FoodShareAPI\bin\Debug\net8.0\Microsoft.AspNetCore.SignalR.Client.dll
+C:\Users\ICEP-INTERN\Documents\FoodShareNetwork222\Buffet-Food-Redistribution-Server\FoodShareAPI\bin\Debug\net8.0\Microsoft.AspNetCore.SignalR.Client.Core.dll
+C:\Users\ICEP-INTERN\Documents\FoodShareNetwork222\Buffet-Food-Redistribution-Server\FoodShareAPI\bin\Debug\net8.0\Microsoft.AspNetCore.SignalR.Common.dll
+C:\Users\ICEP-INTERN\Documents\FoodShareNetwork222\Buffet-Food-Redistribution-Server\FoodShareAPI\bin\Debug\net8.0\Microsoft.AspNetCore.SignalR.Protocols.Json.dll
+C:\Users\ICEP-INTERN\Documents\FoodShareNetwork222\Buffet-Food-Redistribution-Server\FoodShareAPI\bin\Debug\net8.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+C:\Users\ICEP-INTERN\Documents\FoodShareNetwork222\Buffet-Food-Redistribution-Server\FoodShareAPI\bin\Debug\net8.0\Microsoft.Extensions.Features.dll
+C:\Users\ICEP-INTERN\Documents\FoodShareNetwork222\Buffet-Food-Redistribution-Server\FoodShareAPI\bin\Debug\net8.0\Microsoft.Extensions.Logging.Abstractions.dll
+C:\Users\ICEP-INTERN\Documents\FoodShareNetwork222\Buffet-Food-Redistribution-Server\FoodShareAPI\bin\Debug\net8.0\Microsoft.Extensions.Options.dll
+C:\Users\ICEP-INTERN\Documents\FoodShareNetwork222\Buffet-Food-Redistribution-Server\FoodShareAPI\bin\Debug\net8.0\BouncyCastle.Cryptography.dll
+C:\Users\ICEP-INTERN\Documents\FoodShareNetwork222\Buffet-Food-Redistribution-Server\FoodShareAPI\bin\Debug\net8.0\MailKit.dll
+C:\Users\ICEP-INTERN\Documents\FoodShareNetwork222\Buffet-Food-Redistribution-Server\FoodShareAPI\bin\Debug\net8.0\MimeKit.dll

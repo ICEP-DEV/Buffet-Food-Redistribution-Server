@@ -1,4 +1,5 @@
 using Application.Contracts;
+using Application.DTOs;
 using Infrastructure.Data;
 using Infrastructure.DependencyInjection;
 using Infrastructure.Repo;
@@ -47,8 +48,10 @@ builder.Services.AddSwaggerGen(options =>
     // Add other Swagger configuration here...
 });
 
+builder.Services.AddSignalR();
 
 
+builder.Services.Configure<EmailSettings>(builder.Configuration.GetSection("EmailSettings"));
 builder.Services.InfrastructureServices(builder.Configuration);
 
 
@@ -75,6 +78,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.MapHub<NotificationsHub>(pattern:"/notifications");
 
 app.UseStaticFiles(new StaticFileOptions
 {
