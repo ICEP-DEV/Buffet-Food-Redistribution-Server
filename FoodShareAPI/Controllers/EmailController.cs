@@ -17,17 +17,19 @@ namespace FoodShareAPI.Controllers
         }
 
         [HttpPost("SendaMail")]
-        public async Task <IActionResult> SendMail()
+        public async Task <IActionResult> SendMail(int donorId, int itemId)
         {
             try
             {
+                string? donorEmail = await _email.GetDonorEmail(donorId, itemId);
+                
                 MailRequestDTO mailRequest = new MailRequestDTO();
 
-                mailRequest.ToEmail = "kamomohapi17@gmail.com";
+                mailRequest.ToEmail = donorEmail;
                 mailRequest.Subject = "Welcome to food share nerwork";
-                mailRequest.Body = "A request for food has been made";
+                mailRequest.Body = "A request for food has been made to confirm the request please click";
 
-                await _email.SendEmailAsync(mailRequest);
+                await _email.SendEmailAsync(mailRequest,donorId);
 
                 return Ok();
             }catch (Exception ex)

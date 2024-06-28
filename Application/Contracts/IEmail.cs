@@ -9,6 +9,8 @@ namespace Application.Contracts
 {
     public interface IEmail
     {
-        Task SendEmailAsync(MailRequestDTO mailRequest);
+        Task SendEmailAsync(MailRequestDTO mailRequest,int donorId);
+        Task<string?> GetDonorEmailFromDatabase(int donorId);
+        Task<string> GetDonorEmail(int donorId, int itemId);
     }
 }
