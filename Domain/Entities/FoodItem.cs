@@ -22,12 +22,14 @@ namespace Domain.Entities
 
         public string Address { get; set; } = string.Empty;
 
+        public string Contact { get; set; } = string.Empty;
+
         //public string ItemImage { get; set; } = string.Empty;
 
 
 
-       // [NotMapped]
-       // public IFormFile? ImageFile { get; set; } 
-        
+        // [NotMapped]
+        // public IFormFile? ImageFile { get; set; } 
+
     }
 }

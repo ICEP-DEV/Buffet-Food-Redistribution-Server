@@ -17,5 +17,7 @@ namespace Infrastructure.Data
         public DbSet<Admin> Admin { get; set; }
 
         public DbSet<FoodItem>FoodItems { get; set; }
+
+        public DbSet<DonationRequest> DonationRequests { get; set; }
     }
 }

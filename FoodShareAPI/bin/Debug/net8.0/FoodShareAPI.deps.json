@@ -9,6 +9,7 @@
       "FoodShareAPI/1.0.0": {
         "dependencies": {
           "Application": "1.0.0",
+          "Domain": "1.0.0",
           "Infrastructure": "1.0.0",
           "Microsoft.AspNetCore.SignalR.Client": "8.0.6",
           "Microsoft.AspNetCore.SignalR.Common": "8.0.6",

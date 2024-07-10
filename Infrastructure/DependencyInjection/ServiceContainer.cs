@@ -7,7 +7,8 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Application.Contracts;
 using Infrastructure.Repo;
-using Nest;
+//using Nest;
+//using Nest;
 using Domain.Entities;
 using Application.DTOs;
 namespace Infrastructure.DependencyInjection
@@ -49,6 +50,8 @@ namespace Infrastructure.DependencyInjection
             services.AddScoped<IFoodDonation, DonationsRepo>();
             services.AddScoped<ICustomAuthentication, AuthenticationRepo>();
             services.AddScoped<IEmail,EmailRepo>();
+            services.AddScoped<IRequest, RequestRepo>();
+
 
             return services;
         }

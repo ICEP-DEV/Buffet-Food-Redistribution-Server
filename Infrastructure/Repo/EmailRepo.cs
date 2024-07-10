@@ -19,17 +19,19 @@ namespace Infrastructure.Repo
     {
         private readonly EmailSettings _settings;
         private readonly AppDbContext _appDbContext;
+        private readonly IRequest _request;
 
-        public EmailRepo(IOptions<EmailSettings> settings, AppDbContext appDbContext)
+        public EmailRepo(IOptions<EmailSettings> settings, AppDbContext appDbContext, IRequest request)
         {
             this._settings = settings.Value;
             this._appDbContext = appDbContext;
+            this._request = request;
         }
 
-        public async Task SendEmailAsync(MailRequestDTO mailRequest, int donorId)
+        public async Task SendEmailAsync(MailRequestDTO mailRequest, string dEmail)
         {
             try
-            {   string? donorEmail = await GetDonorEmailFromDatabase(donorId);
+            {   string? donorEmail = await GetDonorEmailFromDatabase(dEmail);
 
                 var email = new MimeMessage();
                 email.From.Add(MailboxAddress.Parse(_settings.Email));
@@ -55,12 +57,39 @@ namespace Infrastructure.Repo
             }
         }
 
-
-        public async Task<string?> GetDonorEmailFromDatabase(int donorId)
+        public async Task NotifyRecipient(RecipientMailDTO mailRecipient, int  requestId)
         {
             try
             {
-                var donor = await _appDbContext.Donors.FirstOrDefaultAsync(d => d.DonorId == donorId);
+                string? recipientEmail = await GetRecipientEmail(requestId);
+                var email = new MimeMessage();
+                email.From.Add(MailboxAddress.Parse(_settings.Email));
+                email.To.Add(MailboxAddress.Parse(mailRecipient.ToEmail));
+                email.Subject = mailRecipient.Subject;
+
+                var builder = new BodyBuilder();
+                builder.HtmlBody = mailRecipient.Body;
+
+                email.Body = builder.ToMessageBody();
+
+                using var smtp = new SmtpClient();
+                await smtp.ConnectAsync(_settings.Host, _settings.Port, SecureSocketOptions.StartTls);
+                await smtp.AuthenticateAsync(_settings.Email, _settings.Password);
+
+                await smtp.SendAsync(email);
+                await smtp.DisconnectAsync(true);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error sending email: {ex.Message}");
+                throw;
+            }
+        }
+        public async Task<string?> GetDonorEmailFromDatabase(string email)
+        {
+            try
+            {
+                var donor = await _appDbContext.Donors.FirstOrDefaultAsync(d => d.DonorEmail == email);
                 return donor.DonorEmail;
             }
             catch (Exception ex)
@@ -70,33 +99,29 @@ namespace Infrastructure.Repo
             }
             
         }
-        /* public string GetDonationsDetails()
-         {
+
+        public async Task<string?> GetRecipientEmail(int requestId)
+        {
+            // Get the recipient ID asynchronously
+            var recipientId = await _request.GetRecipientIdForDonationRequestAsync(requestId);
+
+            if (recipientId.HasValue)
+            {
+                // Retrieve the recipient from the database
+                var recipient = await _appDbContext.Recipients.FirstOrDefaultAsync(r => r.Id == recipientId.Value);
+
+                // Return the recipient's email
+                return recipient?.RecipientEmail;
+            }
+
+            return null; // Handle the case where recipientId is null or recipient is not found
+        }
 
 
-             var foodDonations = _appDbContext.FoodDonations.ToList();
-             var donors = _appDbContext.Donors;
-             var foodItems = _appDbContext.FoodItems;
-
-             StringBuilder sb = new StringBuilder();
-
-             var donationDetails = foodDonations.Select(fd => new
-             {
-                 DonationId = fd.DonationId,
-                // DonationDate = fd.DonationDate,
-                 Donor = donors.FirstOrDefault(d => d.DonorId == fd.DonorId),
-                 FoodItem = foodItems.FirstOrDefault(fi => fi.Id == fd.ItemId),
-
-
-             });
-
-             return sb.ToString();
-         */
-
-        public async Task<string> GetDonorEmail(int donorId, int itemId)
+        public async Task<string?> GetDonorEmail(int donorId)
         {
             var donorEmail = await _appDbContext.FoodDonations
-                .Where(fd => fd.DonorId == donorId && fd.ItemId == itemId)
+                .Where(fd => fd.DonorId == donorId)
                 .Join(_appDbContext.Donors, fd => fd.DonorId, d => d.DonorId, (fd, d) => new { FoodDonation = fd, Donor = d })
                 .Join(_appDbContext.FoodItems, j => j.FoodDonation.ItemId, fi => fi.Id, (j, fi) => new { j.Donor, FoodItem = fi })
                 .Select(j => j.Donor.DonorEmail)

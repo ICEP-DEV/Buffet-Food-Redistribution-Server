@@ -5693,6 +5693,7 @@
   "projectFileDependencyGroups": {
     "net8.0": [
       "Application >= 1.0.0",
+      "Domain >= 1.0.0",
       "Infrastructure >= 1.0.0",
       "Microsoft.AspNetCore.SignalR.Client >= 8.0.6",
       "Microsoft.AspNetCore.SignalR.Common >= 8.0.6",
@@ -5730,6 +5731,9 @@
           "projectReferences": {
             "C:\\Users\\218501036\\Desktop\\Buffet-Food-Redistribution-Server\\Application\\Application.csproj": {
               "projectPath": "C:\\Users\\218501036\\Desktop\\Buffet-Food-Redistribution-Server\\Application\\Application.csproj"
+            },
+            "C:\\Users\\218501036\\Desktop\\Buffet-Food-Redistribution-Server\\Domain\\Domain.csproj": {
+              "projectPath": "C:\\Users\\218501036\\Desktop\\Buffet-Food-Redistribution-Server\\Domain\\Domain.csproj"
             },
             "C:\\Users\\218501036\\Desktop\\Buffet-Food-Redistribution-Server\\Infrastructure\\Infrastructure.csproj": {
               "projectPath": "C:\\Users\\218501036\\Desktop\\Buffet-Food-Redistribution-Server\\Infrastructure\\Infrastructure.csproj"
