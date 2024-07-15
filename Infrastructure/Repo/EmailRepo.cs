@@ -12,6 +12,8 @@ using MailKit.Net.Smtp;
 using Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Domain.Entities;
+using Microsoft.AspNetCore.Mvc;
+using System.Text.Json;
 
 namespace Infrastructure.Repo
 {
@@ -117,6 +119,38 @@ namespace Infrastructure.Repo
             return null; // Handle the case where recipientId is null or recipient is not found
         }
 
+    public async Task<string> GetRecipientInfo(int requestId)
+{
+    var donationRequest = await _appDbContext.DonationRequests
+                                            .FirstOrDefaultAsync(dr => dr.RequestId == requestId);
+
+    if (donationRequest == null)
+    {
+        throw new InvalidOperationException($"Donation request with ID {requestId} not found.");
+    }
+
+    var recipient = await _appDbContext.Recipients
+                                       .FirstOrDefaultAsync(r => r.Id == donationRequest.RecipientId);
+
+    if (recipient == null)
+    {
+        throw new InvalidOperationException($"Recipient with ID {donationRequest.RecipientId} not found in the database.");
+    }
+
+    // Create a DTO object with recipient information
+    var recipientData = new RecipientDTO
+    {
+        RecipientName = recipient.RecipientName,
+        RecipientEmail = recipient.RecipientEmail,
+        RecipientAddress = recipient.RecipientAddress,
+        RecipientPhoneNum = recipient.RecipientPhoneNum,
+    };
+
+    // Serialize recipientData to JSON string
+    string json = JsonSerializer.Serialize(recipientData);
+
+    return json;
+}
 
         public async Task<string?> GetDonorEmail(int donorId)
         {

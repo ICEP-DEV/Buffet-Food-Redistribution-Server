@@ -1,4 +1,6 @@
 ﻿using Application.DTOs;
+using Domain.Entities;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,5 +18,6 @@ namespace Application.Contracts
         Task NotifyRecipient(RecipientMailDTO mailRecipient, int requestId);
 
         Task<string> GetRecipientEmail(int requestId);
+        Task<string> GetRecipientInfo(int  recipientId);
     }
 }

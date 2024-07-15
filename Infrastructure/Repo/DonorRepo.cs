@@ -94,7 +94,7 @@ namespace Infrastructure.Repo
 
         public async Task<int> UpdateDonorAsync( Donor donor)
         {
-            var userIdClaim = _httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier);
+            var userIdClaim = _httpContextAccessor.HttpContext?.User?.FindFirst(ClaimTypes.NameIdentifier);
 
             if (!string.IsNullOrEmpty(donor.Password))
             {
@@ -124,9 +124,9 @@ namespace Infrastructure.Repo
 
        public async Task<int> DeleteDonorAsync(int id)
         {
-            var donorIdClaim = _httpContextAccessor.HttpContext.User.FindFirst("DonorId");
+            var donorIdClaim = _httpContextAccessor.HttpContext?.User?.FindFirst("DonorId");
 
-        if (donorIdClaim == null || !int.TryParse(donorIdClaim.Value, out int donorId))
+            if (donorIdClaim == null || !int.TryParse(donorIdClaim.Value, out int donorId))
         {
             // Handle case where donorId claim is not found or cannot be parsed
             // For example, return an error code or throw an exception
@@ -168,13 +168,13 @@ namespace Infrastructure.Repo
 
         public async Task<Donor> GetDonorProfile()
         {
-            var identity = _httpContextAccessor.HttpContext.User.Identity as ClaimsIdentity;
-            var donorIdClaim = _httpContextAccessor.HttpContext.User.FindFirst("DonorId");
+            var identity = _httpContextAccessor.HttpContext?.User?.Identity as ClaimsIdentity;
+            var donorIdClaim = _httpContextAccessor.HttpContext?.User?.FindFirst("DonorId");
            
-            var Name = identity.FindFirst(ClaimTypes.Name)?.Value;
-            var Email = identity.FindFirst(ClaimTypes.Email)?.Value;
-            var Address = identity.FindFirst(ClaimTypes.StreetAddress)?.Value;
-            var PhoneNum = identity.FindFirst(ClaimTypes.MobilePhone)?.Value;
+            var Name = identity?.FindFirst(ClaimTypes.Name)?.Value;
+            var Email = identity?.FindFirst(ClaimTypes.Email)?.Value;
+            var Address = identity?.FindFirst(ClaimTypes.StreetAddress)?.Value;
+            var PhoneNum = identity?.FindFirst(ClaimTypes.MobilePhone)?.Value;
 
             if (donorIdClaim != null && int.TryParse(donorIdClaim.Value, out int DonorId))
             {

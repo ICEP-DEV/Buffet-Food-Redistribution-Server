@@ -12,7 +12,7 @@ namespace FoodShareAPI.Controllers
     {
         private readonly IEmail _email;
         private readonly IRequest _request;
-       
+
 
         public EmailController(IEmail email, IRequest request)
         {
@@ -21,33 +21,33 @@ namespace FoodShareAPI.Controllers
         }
 
         [HttpPost("DonorMail")]
-        public async Task <IActionResult> SendMail(string email, int itemId)
-        { 
+        public async Task<IActionResult> SendMail(string email, int itemId)
+        {
             try
             {
                 string? donorEmail = await _email.GetDonorEmailFromDatabase(email);
                 int donation = await _request.GetDonorDonation(itemId);
                 int requestId = await _request.GetRequestId(donation);
                 _request.CreateRequest(donation);
-                
+
                 MailRequestDTO mailRequest = new MailRequestDTO();
 
                 mailRequest.ToEmail = donorEmail;
                 mailRequest.Subject = "Donation Request from Food Share Nerwork";
                 mailRequest.Body = $"We are writing to you notify you that there is a request for the food you donated<br/>" +
                                     $"To accept or decline this request, please visit <a href='http://localhost:3000/request/{requestId}' >here</a> <br/><br/>" +
-                                    $"Thank you for time and consideration. <br/><br/>" + 
+                                    $"Thank you for time and consideration. <br/><br/>" +
                                     $"Sincerely,<br/><br/>" +
                                     $"Food Share Network";
 
                 await _email.SendEmailAsync(mailRequest, email);
 
                 return Ok();
-            }catch (Exception ex)
+            } catch (Exception ex)
             {
                 throw;
             }
-           
+
         }
 
         [HttpPost("RecipientMail")]
@@ -59,7 +59,7 @@ namespace FoodShareAPI.Controllers
             var status = await _request.GetRequestStatus(requestId);
 
 
-            RecipientMailDTO recipientMailDTO = new RecipientMailDTO(); 
+            RecipientMailDTO recipientMailDTO = new RecipientMailDTO();
 
             recipientMailDTO.ToEmail = email;
             recipientMailDTO.Subject = "Response to your request from Food Share Network";
@@ -72,17 +72,30 @@ namespace FoodShareAPI.Controllers
         }
 
 
-        [HttpGet("{id}")]
-        public async Task<IActionResult> GetEmail(int id)
+        [HttpGet]
+        public async Task<IActionResult> GetEmail(int requestid)
         {
-            var email = await _email.GetRecipientEmail(id);
-
-            if (email == null)
+            //var email = await _email.GetRecipientEmail(id);
+            var recipient = await _email.GetRecipientInfo(requestid);
+            if (recipient == null)
             {
-                return NotFound($"Email not found for recipient ID {id}");
+                return NotFound($"Email not found for recipient ID {requestid}");
             }
 
-            return Ok(email);
+            return Ok(recipient);
         }
+
+      //  [HttpGet("{Id}")]
+        /*public IActionResult GetRecipientInfo(int id) {
+
+            var recipient = _email.GetRecipientInfo(id);
+
+            if(recipient == null)
+            {
+                return NotFound("Not found");
+
+            }
+            return Ok(recipient);
+        }*/
     }
 }

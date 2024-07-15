@@ -3,7 +3,20 @@
   "WorkspaceRootPath": "C:\\Users\\218501036\\Desktop\\Buffet-Food-Redistribution-Server\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|ViewDataWindow_MSSQL__/_localdb__MSSQLLocalDB/FoodShareDb/True/SqlTable/dbo.DonationRequests.sql||{0058A1F7-65F3-4DB9-B3D0-CA7E64DD73CD}"
+      "AbsoluteMoniker": "D:0:0:{124295E1-C310-4854-A3B2-5178D87317F0}|Infrastructure\\Infrastructure.csproj|c:\\users\\218501036\\desktop\\buffet-food-redistribution-server\\infrastructure\\repo\\donorrepo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{124295E1-C310-4854-A3B2-5178D87317F0}|Infrastructure\\Infrastructure.csproj|solutionrelative:infrastructure\\repo\\donorrepo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{124295E1-C310-4854-A3B2-5178D87317F0}|Infrastructure\\Infrastructure.csproj|c:\\users\\218501036\\desktop\\buffet-food-redistribution-server\\infrastructure\\repo\\recipientrepo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{124295E1-C310-4854-A3B2-5178D87317F0}|Infrastructure\\Infrastructure.csproj|solutionrelative:infrastructure\\repo\\recipientrepo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{124295E1-C310-4854-A3B2-5178D87317F0}|Infrastructure\\Infrastructure.csproj|c:\\users\\218501036\\desktop\\buffet-food-redistribution-server\\infrastructure\\migrations\\20240708132249_new-migration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{124295E1-C310-4854-A3B2-5178D87317F0}|Infrastructure\\Infrastructure.csproj|solutionrelative:infrastructure\\migrations\\20240708132249_new-migration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{124295E1-C310-4854-A3B2-5178D87317F0}|Infrastructure\\Infrastructure.csproj|c:\\users\\218501036\\desktop\\buffet-food-redistribution-server\\infrastructure\\migrations\\20240708132249_new-migration.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{124295E1-C310-4854-A3B2-5178D87317F0}|Infrastructure\\Infrastructure.csproj|solutionrelative:infrastructure\\migrations\\20240708132249_new-migration.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{2423FB9C-D19B-4998-A6B4-5C12F1631BA3}|FoodShareAPI\\FoodShareAPI.csproj|c:\\users\\218501036\\desktop\\buffet-food-redistribution-server\\foodshareapi\\controllers\\emailcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -14,23 +27,29 @@
       "RelativeMoniker": "D:0:0:{124295E1-C310-4854-A3B2-5178D87317F0}|Infrastructure\\Infrastructure.csproj|solutionrelative:infrastructure\\repo\\emailrepo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{124295E1-C310-4854-A3B2-5178D87317F0}|Infrastructure\\Infrastructure.csproj|c:\\users\\218501036\\desktop\\buffet-food-redistribution-server\\infrastructure\\repo\\requestrepo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{124295E1-C310-4854-A3B2-5178D87317F0}|Infrastructure\\Infrastructure.csproj|solutionrelative:infrastructure\\repo\\requestrepo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|ViewDataWindow_MSSQL__/_localdb__MSSQLLocalDB/FoodShareDb/True/SqlTable/dbo.DonationRequests.sql||{0058A1F7-65F3-4DB9-B3D0-CA7E64DD73CD}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|ViewDataWindow_MSSQL__/_localdb__MSSQLLocalDB/FoodShareDb/True/SqlTable/dbo.Recipients.sql||{0058A1F7-65F3-4DB9-B3D0-CA7E64DD73CD}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|ViewDataWindow_MSSQL__/_localdb__MSSQLLocalDB/FoodShareDb/True/SqlTable/dbo.FoodItems.sql||{0058A1F7-65F3-4DB9-B3D0-CA7E64DD73CD}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3A186EA8-29E2-40FE-BA46-8547B7051EF7}|Application\\Application.csproj|c:\\users\\218501036\\desktop\\buffet-food-redistribution-server\\application\\contracts\\iemail.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3A186EA8-29E2-40FE-BA46-8547B7051EF7}|Application\\Application.csproj|solutionrelative:application\\contracts\\iemail.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{3A186EA8-29E2-40FE-BA46-8547B7051EF7}|Application\\Application.csproj|c:\\users\\218501036\\desktop\\buffet-food-redistribution-server\\application\\contracts\\irequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{3A186EA8-29E2-40FE-BA46-8547B7051EF7}|Application\\Application.csproj|solutionrelative:application\\contracts\\irequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{124295E1-C310-4854-A3B2-5178D87317F0}|Infrastructure\\Infrastructure.csproj|c:\\users\\218501036\\desktop\\buffet-food-redistribution-server\\infrastructure\\repo\\requestrepo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{124295E1-C310-4854-A3B2-5178D87317F0}|Infrastructure\\Infrastructure.csproj|solutionrelative:infrastructure\\repo\\requestrepo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{3A186EA8-29E2-40FE-BA46-8547B7051EF7}|Application\\Application.csproj|c:\\users\\218501036\\desktop\\buffet-food-redistribution-server\\application\\dtos\\recipientmaildto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{3A186EA8-29E2-40FE-BA46-8547B7051EF7}|Application\\Application.csproj|solutionrelative:application\\dtos\\recipientmaildto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{3A186EA8-29E2-40FE-BA46-8547B7051EF7}|Application\\Application.csproj|c:\\users\\218501036\\desktop\\buffet-food-redistribution-server\\application\\contracts\\iemail.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{3A186EA8-29E2-40FE-BA46-8547B7051EF7}|Application\\Application.csproj|solutionrelative:application\\contracts\\iemail.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -40,37 +59,99 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": 4,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 1,
+              "Title": "RecipientRepo.cs",
+              "DocumentMoniker": "C:\\Users\\218501036\\Desktop\\Buffet-Food-Redistribution-Server\\Infrastructure\\Repo\\RecipientRepo.cs",
+              "RelativeDocumentMoniker": "Infrastructure\\Repo\\RecipientRepo.cs",
+              "ToolTip": "C:\\Users\\218501036\\Desktop\\Buffet-Food-Redistribution-Server\\Infrastructure\\Repo\\RecipientRepo.cs",
+              "RelativeToolTip": "Infrastructure\\Repo\\RecipientRepo.cs",
+              "ViewState": "AQIAAIcAAAAAAAAAAAAvwIcAAAA6AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-12T08:15:09.198Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "20240708132249_new-migration.cs",
+              "DocumentMoniker": "C:\\Users\\218501036\\Desktop\\Buffet-Food-Redistribution-Server\\Infrastructure\\Migrations\\20240708132249_new-migration.cs",
+              "RelativeDocumentMoniker": "Infrastructure\\Migrations\\20240708132249_new-migration.cs",
+              "ToolTip": "C:\\Users\\218501036\\Desktop\\Buffet-Food-Redistribution-Server\\Infrastructure\\Migrations\\20240708132249_new-migration.cs",
+              "RelativeToolTip": "Infrastructure\\Migrations\\20240708132249_new-migration.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAcAAAAZAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-12T08:15:06.124Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "20240708132249_new-migration.Designer.cs",
+              "DocumentMoniker": "C:\\Users\\218501036\\Desktop\\Buffet-Food-Redistribution-Server\\Infrastructure\\Migrations\\20240708132249_new-migration.Designer.cs",
+              "RelativeDocumentMoniker": "Infrastructure\\Migrations\\20240708132249_new-migration.Designer.cs",
+              "ToolTip": "C:\\Users\\218501036\\Desktop\\Buffet-Food-Redistribution-Server\\Infrastructure\\Migrations\\20240708132249_new-migration.Designer.cs",
+              "RelativeToolTip": "Infrastructure\\Migrations\\20240708132249_new-migration.Designer.cs",
+              "ViewState": "AQIAAAcAAAAAAAAAAAAewA8AAAASAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-12T08:15:02.481Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "dbo.FoodItems [Data]",
+              "DocumentMoniker": "ViewDataWindow_MSSQL__/_localdb__MSSQLLocalDB/FoodShareDb/True/SqlTable/dbo.FoodItems.sql",
+              "ToolTip": "dbo.FoodItems [Data]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000826|",
+              "WhenOpened": "2024-07-12T07:31:01.823Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "DonorRepo.cs",
+              "DocumentMoniker": "C:\\Users\\218501036\\Desktop\\Buffet-Food-Redistribution-Server\\Infrastructure\\Repo\\DonorRepo.cs",
+              "RelativeDocumentMoniker": "Infrastructure\\Repo\\DonorRepo.cs",
+              "ToolTip": "C:\\Users\\218501036\\Desktop\\Buffet-Food-Redistribution-Server\\Infrastructure\\Repo\\DonorRepo.cs",
+              "RelativeToolTip": "Infrastructure\\Repo\\DonorRepo.cs",
+              "ViewState": "AQIAAKQAAAAAAAAAAAAMwKgAAAAUAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-12T07:03:00.233Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
               "Title": "RequestRepo.cs",
               "DocumentMoniker": "C:\\Users\\218501036\\Desktop\\Buffet-Food-Redistribution-Server\\Infrastructure\\Repo\\RequestRepo.cs",
               "RelativeDocumentMoniker": "Infrastructure\\Repo\\RequestRepo.cs",
               "ToolTip": "C:\\Users\\218501036\\Desktop\\Buffet-Food-Redistribution-Server\\Infrastructure\\Repo\\RequestRepo.cs",
               "RelativeToolTip": "Infrastructure\\Repo\\RequestRepo.cs",
-              "ViewState": "AQIAAF4AAAAAAAAAAAAcwGEAAAAyAAAA",
+              "ViewState": "AQIAAE0AAAAAAAAAAAAewE4AAAAUAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-07-10T09:26:13.502Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 11,
               "Title": "IRequest.cs",
               "DocumentMoniker": "C:\\Users\\218501036\\Desktop\\Buffet-Food-Redistribution-Server\\Application\\Contracts\\IRequest.cs",
               "RelativeDocumentMoniker": "Application\\Contracts\\IRequest.cs",
               "ToolTip": "C:\\Users\\218501036\\Desktop\\Buffet-Food-Redistribution-Server\\Application\\Contracts\\IRequest.cs",
               "RelativeToolTip": "Application\\Contracts\\IRequest.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "ViewState": "AQIAAAcAAAAAAAAAAAAcwBMAAAA4AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-07-10T09:25:19.509Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 8,
               "Title": "dbo.Recipients [Data]",
               "DocumentMoniker": "ViewDataWindow_MSSQL__/_localdb__MSSQLLocalDB/FoodShareDb/True/SqlTable/dbo.Recipients.sql",
               "ToolTip": "dbo.Recipients [Data]",
@@ -80,7 +161,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 7,
               "Title": "dbo.DonationRequests [Data]",
               "DocumentMoniker": "ViewDataWindow_MSSQL__/_localdb__MSSQLLocalDB/FoodShareDb/True/SqlTable/dbo.DonationRequests.sql",
               "ToolTip": "dbo.DonationRequests [Data]",
@@ -90,7 +171,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 12,
               "Title": "RecipientMailDTO.cs",
               "DocumentMoniker": "C:\\Users\\218501036\\Desktop\\Buffet-Food-Redistribution-Server\\Application\\DTOs\\RecipientMailDTO.cs",
               "RelativeDocumentMoniker": "Application\\DTOs\\RecipientMailDTO.cs",
@@ -98,44 +179,43 @@
               "RelativeToolTip": "Application\\DTOs\\RecipientMailDTO.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAgAAAAhAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-10T08:23:15.619Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-07-10T08:23:15.619Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 10,
               "Title": "IEmail.cs",
               "DocumentMoniker": "C:\\Users\\218501036\\Desktop\\Buffet-Food-Redistribution-Server\\Application\\Contracts\\IEmail.cs",
               "RelativeDocumentMoniker": "Application\\Contracts\\IEmail.cs",
               "ToolTip": "C:\\Users\\218501036\\Desktop\\Buffet-Food-Redistribution-Server\\Application\\Contracts\\IEmail.cs",
               "RelativeToolTip": "Application\\Contracts\\IEmail.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA8AAABKAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABQAAAAUAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-07-10T08:22:04.25Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 5,
               "Title": "EmailRepo.cs",
               "DocumentMoniker": "C:\\Users\\218501036\\Desktop\\Buffet-Food-Redistribution-Server\\Infrastructure\\Repo\\EmailRepo.cs",
               "RelativeDocumentMoniker": "Infrastructure\\Repo\\EmailRepo.cs",
               "ToolTip": "C:\\Users\\218501036\\Desktop\\Buffet-Food-Redistribution-Server\\Infrastructure\\Repo\\EmailRepo.cs",
               "RelativeToolTip": "Infrastructure\\Repo\\EmailRepo.cs",
-              "ViewState": "AQIAAEsAAAAAAAAAAAAuwFoAAAANAAAA",
+              "ViewState": "AQIAAHUAAAAAAAAAAAAAwJgAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-07-10T08:21:12.003Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 4,
               "Title": "EmailController.cs",
               "DocumentMoniker": "C:\\Users\\218501036\\Desktop\\Buffet-Food-Redistribution-Server\\FoodShareAPI\\Controllers\\EmailController.cs",
               "RelativeDocumentMoniker": "FoodShareAPI\\Controllers\\EmailController.cs",
               "ToolTip": "C:\\Users\\218501036\\Desktop\\Buffet-Food-Redistribution-Server\\FoodShareAPI\\Controllers\\EmailController.cs",
               "RelativeToolTip": "FoodShareAPI\\Controllers\\EmailController.cs",
-              "ViewState": "AQIAADAAAAAAAAAAAAAowDYAAABGAAAA",
+              "ViewState": "AQIAAEcAAAAAAAAAAAAewE4AAAAMAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-07-08T06:54:45.944Z",
               "EditorCaption": ""
