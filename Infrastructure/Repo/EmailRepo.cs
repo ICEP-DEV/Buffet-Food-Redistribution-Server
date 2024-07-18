@@ -33,7 +33,8 @@ namespace Infrastructure.Repo
         public async Task SendEmailAsync(MailRequestDTO mailRequest, string dEmail)
         {
             try
-            {   string? donorEmail = await GetDonorEmailFromDatabase(dEmail);
+            {
+                string? donorEmail = _appDbContext.FoodItems.FirstOrDefault(e => e.Contact == dEmail)?.Contact;
 
                 var email = new MimeMessage();
                 email.From.Add(MailboxAddress.Parse(_settings.Email));

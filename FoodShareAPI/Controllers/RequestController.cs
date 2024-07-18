@@ -19,7 +19,7 @@ namespace FoodShareAPI.Controllers
         }
 
         [HttpPost]
-        [Authorize]
+       
         public IActionResult CreateRequest(int foodDonationId)
         {
             try

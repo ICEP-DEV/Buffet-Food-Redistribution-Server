@@ -51,6 +51,7 @@ namespace Infrastructure.DependencyInjection
             services.AddScoped<ICustomAuthentication, AuthenticationRepo>();
             services.AddScoped<IEmail,EmailRepo>();
             services.AddScoped<IRequest, RequestRepo>();
+            services.AddScoped<IAdmin, AdminRepo>();
 
 
             return services;

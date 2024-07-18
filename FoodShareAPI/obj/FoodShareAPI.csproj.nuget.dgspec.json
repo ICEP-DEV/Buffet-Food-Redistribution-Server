@@ -1,20 +1,24 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\218501036\\Desktop\\Buffet-Food-Redistribution-Server\\FoodShareAPI\\FoodShareAPI.csproj": {}
+    "C:\\Users\\ICEP-INTERN\\Desktop\\Buffet-Food-Redistribution-Server\\FoodShareAPI\\FoodShareAPI.csproj": {}
   },
   "projects": {
-    "C:\\Users\\218501036\\Desktop\\Buffet-Food-Redistribution-Server\\Application\\Application.csproj": {
+    "C:\\Users\\ICEP-INTERN\\Desktop\\Buffet-Food-Redistribution-Server\\Application\\Application.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\218501036\\Desktop\\Buffet-Food-Redistribution-Server\\Application\\Application.csproj",
+        "projectUniqueName": "C:\\Users\\ICEP-INTERN\\Desktop\\Buffet-Food-Redistribution-Server\\Application\\Application.csproj",
         "projectName": "Application",
-        "projectPath": "C:\\Users\\218501036\\Desktop\\Buffet-Food-Redistribution-Server\\Application\\Application.csproj",
-        "packagesPath": "C:\\Users\\218501036\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\218501036\\Desktop\\Buffet-Food-Redistribution-Server\\Application\\obj\\",
+        "projectPath": "C:\\Users\\ICEP-INTERN\\Desktop\\Buffet-Food-Redistribution-Server\\Application\\Application.csproj",
+        "packagesPath": "C:\\Users\\ICEP-INTERN\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\ICEP-INTERN\\Desktop\\Buffet-Food-Redistribution-Server\\Application\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\218501036\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\ICEP-INTERN\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -22,14 +26,15 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\Users\\218501036\\Desktop\\Buffet-Food-Redistribution-Server\\Domain\\Domain.csproj": {
-                "projectPath": "C:\\Users\\218501036\\Desktop\\Buffet-Food-Redistribution-Server\\Domain\\Domain.csproj"
+              "C:\\Users\\ICEP-INTERN\\Desktop\\Buffet-Food-Redistribution-Server\\Domain\\Domain.csproj": {
+                "projectPath": "C:\\Users\\ICEP-INTERN\\Desktop\\Buffet-Food-Redistribution-Server\\Domain\\Domain.csproj"
               }
             }
           }
@@ -82,17 +87,21 @@
         }
       }
     },
-    "C:\\Users\\218501036\\Desktop\\Buffet-Food-Redistribution-Server\\Domain\\Domain.csproj": {
+    "C:\\Users\\ICEP-INTERN\\Desktop\\Buffet-Food-Redistribution-Server\\Domain\\Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\218501036\\Desktop\\Buffet-Food-Redistribution-Server\\Domain\\Domain.csproj",
+        "projectUniqueName": "C:\\Users\\ICEP-INTERN\\Desktop\\Buffet-Food-Redistribution-Server\\Domain\\Domain.csproj",
         "projectName": "Domain",
-        "projectPath": "C:\\Users\\218501036\\Desktop\\Buffet-Food-Redistribution-Server\\Domain\\Domain.csproj",
-        "packagesPath": "C:\\Users\\218501036\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\218501036\\Desktop\\Buffet-Food-Redistribution-Server\\Domain\\obj\\",
+        "projectPath": "C:\\Users\\ICEP-INTERN\\Desktop\\Buffet-Food-Redistribution-Server\\Domain\\Domain.csproj",
+        "packagesPath": "C:\\Users\\ICEP-INTERN\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\ICEP-INTERN\\Desktop\\Buffet-Food-Redistribution-Server\\Domain\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\218501036\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\ICEP-INTERN\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -100,6 +109,7 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -152,17 +162,21 @@
         }
       }
     },
-    "C:\\Users\\218501036\\Desktop\\Buffet-Food-Redistribution-Server\\FoodShareAPI\\FoodShareAPI.csproj": {
+    "C:\\Users\\ICEP-INTERN\\Desktop\\Buffet-Food-Redistribution-Server\\FoodShareAPI\\FoodShareAPI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\218501036\\Desktop\\Buffet-Food-Redistribution-Server\\FoodShareAPI\\FoodShareAPI.csproj",
+        "projectUniqueName": "C:\\Users\\ICEP-INTERN\\Desktop\\Buffet-Food-Redistribution-Server\\FoodShareAPI\\FoodShareAPI.csproj",
         "projectName": "FoodShareAPI",
-        "projectPath": "C:\\Users\\218501036\\Desktop\\Buffet-Food-Redistribution-Server\\FoodShareAPI\\FoodShareAPI.csproj",
-        "packagesPath": "C:\\Users\\218501036\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\218501036\\Desktop\\Buffet-Food-Redistribution-Server\\FoodShareAPI\\obj\\",
+        "projectPath": "C:\\Users\\ICEP-INTERN\\Desktop\\Buffet-Food-Redistribution-Server\\FoodShareAPI\\FoodShareAPI.csproj",
+        "packagesPath": "C:\\Users\\ICEP-INTERN\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\ICEP-INTERN\\Desktop\\Buffet-Food-Redistribution-Server\\FoodShareAPI\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\218501036\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\ICEP-INTERN\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -170,20 +184,21 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\Users\\218501036\\Desktop\\Buffet-Food-Redistribution-Server\\Application\\Application.csproj": {
-                "projectPath": "C:\\Users\\218501036\\Desktop\\Buffet-Food-Redistribution-Server\\Application\\Application.csproj"
+              "C:\\Users\\ICEP-INTERN\\Desktop\\Buffet-Food-Redistribution-Server\\Application\\Application.csproj": {
+                "projectPath": "C:\\Users\\ICEP-INTERN\\Desktop\\Buffet-Food-Redistribution-Server\\Application\\Application.csproj"
               },
-              "C:\\Users\\218501036\\Desktop\\Buffet-Food-Redistribution-Server\\Domain\\Domain.csproj": {
-                "projectPath": "C:\\Users\\218501036\\Desktop\\Buffet-Food-Redistribution-Server\\Domain\\Domain.csproj"
+              "C:\\Users\\ICEP-INTERN\\Desktop\\Buffet-Food-Redistribution-Server\\Domain\\Domain.csproj": {
+                "projectPath": "C:\\Users\\ICEP-INTERN\\Desktop\\Buffet-Food-Redistribution-Server\\Domain\\Domain.csproj"
               },
-              "C:\\Users\\218501036\\Desktop\\Buffet-Food-Redistribution-Server\\Infrastructure\\Infrastructure.csproj": {
-                "projectPath": "C:\\Users\\218501036\\Desktop\\Buffet-Food-Redistribution-Server\\Infrastructure\\Infrastructure.csproj"
+              "C:\\Users\\ICEP-INTERN\\Desktop\\Buffet-Food-Redistribution-Server\\Infrastructure\\Infrastructure.csproj": {
+                "projectPath": "C:\\Users\\ICEP-INTERN\\Desktop\\Buffet-Food-Redistribution-Server\\Infrastructure\\Infrastructure.csproj"
               }
             }
           }
@@ -249,17 +264,21 @@
         }
       }
     },
-    "C:\\Users\\218501036\\Desktop\\Buffet-Food-Redistribution-Server\\Infrastructure\\Infrastructure.csproj": {
+    "C:\\Users\\ICEP-INTERN\\Desktop\\Buffet-Food-Redistribution-Server\\Infrastructure\\Infrastructure.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\218501036\\Desktop\\Buffet-Food-Redistribution-Server\\Infrastructure\\Infrastructure.csproj",
+        "projectUniqueName": "C:\\Users\\ICEP-INTERN\\Desktop\\Buffet-Food-Redistribution-Server\\Infrastructure\\Infrastructure.csproj",
         "projectName": "Infrastructure",
-        "projectPath": "C:\\Users\\218501036\\Desktop\\Buffet-Food-Redistribution-Server\\Infrastructure\\Infrastructure.csproj",
-        "packagesPath": "C:\\Users\\218501036\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\218501036\\Desktop\\Buffet-Food-Redistribution-Server\\Infrastructure\\obj\\",
+        "projectPath": "C:\\Users\\ICEP-INTERN\\Desktop\\Buffet-Food-Redistribution-Server\\Infrastructure\\Infrastructure.csproj",
+        "packagesPath": "C:\\Users\\ICEP-INTERN\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\ICEP-INTERN\\Desktop\\Buffet-Food-Redistribution-Server\\Infrastructure\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\218501036\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\ICEP-INTERN\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -267,14 +286,15 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\Users\\218501036\\Desktop\\Buffet-Food-Redistribution-Server\\Application\\Application.csproj": {
-                "projectPath": "C:\\Users\\218501036\\Desktop\\Buffet-Food-Redistribution-Server\\Application\\Application.csproj"
+              "C:\\Users\\ICEP-INTERN\\Desktop\\Buffet-Food-Redistribution-Server\\Application\\Application.csproj": {
+                "projectPath": "C:\\Users\\ICEP-INTERN\\Desktop\\Buffet-Food-Redistribution-Server\\Application\\Application.csproj"
               }
             }
           }
@@ -300,7 +320,7 @@
             },
             "MailKit": {
               "target": "Package",
-              "version": "[4.6.0, )"
+              "version": "[4.7.1, )"
             },
             "Microsoft.AspNetCore.Authentication.JwtBearer": {
               "target": "Package",
@@ -330,7 +350,7 @@
             },
             "MimeKit": {
               "target": "Package",
-              "version": "[4.6.0, )"
+              "version": "[4.7.1, )"
             }
           },
           "imports": [

@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240606092145_FoodShareDb")]
-    partial class FoodShareDb
+    [Migration("20240717122554_Third")]
+    partial class Third
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -52,6 +52,43 @@ namespace Infrastructure.Migrations
                     b.HasKey("AdminId");
 
                     b.ToTable("Admin");
+
+                    b.HasData(
+                        new
+                        {
+                            AdminId = 1,
+                            Email = "admin@gmail.com",
+                            Name = "admin",
+                            Password = "admin",
+                            Phone = "0126547380"
+                        });
+                });
+
+            modelBuilder.Entity("Domain.Entities.DonationRequest", b =>
+                {
+                    b.Property<int>("RequestId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("RequestId"));
+
+                    b.Property<int>("DonationId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("RecipientId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("RequestId");
+
+                    b.HasIndex("DonationId");
+
+                    b.HasIndex("RecipientId");
+
+                    b.ToTable("DonationRequests");
                 });
 
             modelBuilder.Entity("Domain.Entities.Donor", b =>
@@ -85,6 +122,35 @@ namespace Infrastructure.Migrations
                     b.HasKey("DonorId");
 
                     b.ToTable("Donors");
+
+                    b.HasData(
+                        new
+                        {
+                            DonorId = 1,
+                            DonorAddress = "222 Servaas street",
+                            DonorEmail = "kamomohapi17@gmail.com",
+                            DonorName = "Kamohelo",
+                            DonorPhoneNum = "0123456789",
+                            Password = "$2a$11$givJdsRJ7Jy2SyqWwpj.xub7wkAB6soeGsSMz1d9tYe0mFI0x6Pvu"
+                        },
+                        new
+                        {
+                            DonorId = 2,
+                            DonorAddress = "848 Motsi street",
+                            DonorEmail = "tshepo@gmail.com",
+                            DonorName = "Tshepo",
+                            DonorPhoneNum = "0712563738",
+                            Password = "$2a$11$givJdsRJ7Jy2SyqWwpj.xub7wkAB6soeGsSMz1d9tYe0mFI0x6Pvu"
+                        },
+                        new
+                        {
+                            DonorId = 3,
+                            DonorAddress = "101 Linden street",
+                            DonorEmail = "thabo@gmail.com",
+                            DonorName = "Thabo",
+                            DonorPhoneNum = "0812435627",
+                            Password = "$2a$11$givJdsRJ7Jy2SyqWwpj.xub7wkAB6soeGsSMz1d9tYe0mFI0x6Pvu"
+                        });
                 });
 
             modelBuilder.Entity("Domain.Entities.FoodDonation", b =>
@@ -109,6 +175,10 @@ namespace Infrastructure.Migrations
 
                     b.HasKey("DonationId");
 
+                    b.HasIndex("DonorId");
+
+                    b.HasIndex("ItemId");
+
                     b.ToTable("FoodDonations");
                 });
 
@@ -121,6 +191,10 @@ namespace Infrastructure.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Address")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Contact")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -174,6 +248,64 @@ namespace Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Recipients");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Password = "$2a$11$givJdsRJ7Jy2SyqWwpj.xub7wkAB6soeGsSMz1d9tYe0mFI0x6Pvu",
+                            RecipientAddress = "191 Frederick street",
+                            RecipientEmail = "kamomohapi17@gmail.com",
+                            RecipientName = "Lesedi",
+                            RecipientPhoneNum = "0193377233"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Password = "$2a$11$givJdsRJ7Jy2SyqWwpj.xub7wkAB6soeGsSMz1d9tYe0mFI0x6Pvu",
+                            RecipientAddress = "1921 Maltzan street",
+                            RecipientEmail = "karabo@gmail.com",
+                            RecipientName = "Karabo",
+                            RecipientPhoneNum = "0135537733"
+                        });
+                });
+
+            modelBuilder.Entity("Domain.Entities.DonationRequest", b =>
+                {
+                    b.HasOne("Domain.Entities.FoodDonation", "Donation")
+                        .WithMany()
+                        .HasForeignKey("DonationId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Domain.Entities.Recipient", "Recipient")
+                        .WithMany()
+                        .HasForeignKey("RecipientId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Donation");
+
+                    b.Navigation("Recipient");
+                });
+
+            modelBuilder.Entity("Domain.Entities.FoodDonation", b =>
+                {
+                    b.HasOne("Domain.Entities.Donor", "Donor")
+                        .WithMany()
+                        .HasForeignKey("DonorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Domain.Entities.FoodItem", "FoodItem")
+                        .WithMany()
+                        .HasForeignKey("ItemId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Donor");
+
+                    b.Navigation("FoodItem");
                 });
 #pragma warning restore 612, 618
         }

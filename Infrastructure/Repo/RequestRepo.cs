@@ -76,14 +76,17 @@ namespace Infrastructure.Repo
             return donationId;    
         }
 
-        public async Task<int> GetRequestId(int donationId)
+        public async Task<int?> GetRequestId(int donationId)
         {
+            /*var requestId = await _appDbContext.DonationRequests
+                             .Where(dr => dr.DonationId == donationId)
+                             .Select(dr => (int?)dr.RequestId) // Cast to int? for nullable return
+                             .FirstOrDefaultAsync();
+            return requestId;*/
 
-            var requestId =  _appDbContext.DonationRequests.
-                            Where(dr=> dr.DonationId == donationId)
-                            .Select(dr => dr.RequestId)
-                            .FirstOrDefault();
-            return requestId;
+            var requestId = await _appDbContext.DonationRequests.FirstOrDefaultAsync(d => d.DonationId == donationId);
+
+            return requestId != null ? requestId.RequestId : (int?) null;
         }
 
         public async Task<int?> GetRecipientIdForDonationRequestAsync(int requestId)

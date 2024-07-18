@@ -88,12 +88,10 @@ namespace Infrastructure.Repo
         public async Task<int> UpdateRecipientAsync(int id, Recipient recipient)
         {
             string message = string.Empty;
-            var userIdClaim = _httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier);
-
+            var userIdClaim = _httpContextAccessor?.HttpContext?.User.FindFirst(ClaimTypes.NameIdentifier);
 
             if (userIdClaim == null || !int.TryParse(userIdClaim.Value, out int userId))
             {
-                // Handle case where user ID claim is not found or cannot be parsed
                 throw new ApplicationException("User ID claim not found or invalid.");
             }
 
@@ -131,15 +129,15 @@ namespace Infrastructure.Repo
             return await _appDbContext.Recipients.Where(u => u.Id == id).ExecuteDeleteAsync();
         }
 
-        public async Task <Recipient> GetRecipientProfile()
+        public Task<Recipient> GetRecipientProfile()
         {
-            var identity = _httpContextAccessor.HttpContext.User.Identity as ClaimsIdentity;
-            var recipientIdClaim = _httpContextAccessor.HttpContext.User.FindFirst("RecipientId");
+            var identity = _httpContextAccessor?.HttpContext?.User.Identity as ClaimsIdentity;
+            var recipientIdClaim = _httpContextAccessor?.HttpContext?.User.FindFirst("RecipientId");
 
-            var Name = identity.FindFirst(ClaimTypes.Name)?.Value;
-            var Email = identity.FindFirst(ClaimTypes.Email)?.Value;
-            var Address = identity.FindFirst(ClaimTypes.StreetAddress)?.Value;
-            var PhoneNum = identity.FindFirst(ClaimTypes.MobilePhone)?.Value;
+            var Name = identity?.FindFirst(ClaimTypes.Name)?.Value;
+            var Email = identity?.FindFirst(ClaimTypes.Email)?.Value;
+            var Address = identity?.FindFirst(ClaimTypes.StreetAddress)?.Value;
+            var PhoneNum = identity?.FindFirst(ClaimTypes.MobilePhone)?.Value;
 
             if (recipientIdClaim != null && int.TryParse(recipientIdClaim.Value, out int Id))
             {
@@ -152,13 +150,13 @@ namespace Infrastructure.Repo
                     RecipientAddress = Address
                 };
 
-                return RecipientProfile;
+                return Task.FromResult(RecipientProfile); // Return completed Task with RecipientProfile
             }
             else
             {
-                // Handle case where DonorId claim is not found or cannot be parsed
+                // Handle case where RecipientId claim is not found or cannot be parsed
                 // For example, you can return null or throw an exception
-                return null;
+                return Task.FromResult<Recipient>(null); // Return null wrapped in a Task
             }
         }
 

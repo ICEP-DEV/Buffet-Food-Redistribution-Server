@@ -13,15 +13,16 @@ namespace Domain.Entities
         [Key]
         public int DonationId { get; set; }
 
-        [ForeignKey("Donor") ]
+        [ForeignKey("Donor")]
         public int DonorId { get; set; }
+        public Donor? Donor { get; set; }
 
         [ForeignKey("FoodItem")]
         public int ItemId { get; set; }
+        public FoodItem? FoodItem { get; set; }
 
         public int Quantity { get; set; }
         public DateTime DateCooked { get; set; }
-
 
 
 

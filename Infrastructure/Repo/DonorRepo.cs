@@ -77,12 +77,12 @@ namespace Infrastructure.Repo
             
             return new RegistrationResponse(true, "Registration completed");
         }
-       
-        public async Task<Donor> GetDonorByEmail(string email)
-        {
-            var result = appDbContext.Donors.FirstOrDefault(u => u.DonorEmail == email); ;
 
-            return result;
+        public Task<Donor?> GetDonorByEmail(string email)
+        {
+            var result = appDbContext.Donors.FirstOrDefault(u => u.DonorEmail == email);
+
+            return Task.FromResult(result);
         }
 
         public async Task<List<Donor>> GetDonorListAsync()
@@ -166,11 +166,11 @@ namespace Infrastructure.Repo
             return new JwtSecurityTokenHandler().WriteToken(token);
         }
 
-        public async Task<Donor> GetDonorProfile()
+        public Task<Donor> GetDonorProfile()
         {
             var identity = _httpContextAccessor.HttpContext?.User?.Identity as ClaimsIdentity;
             var donorIdClaim = _httpContextAccessor.HttpContext?.User?.FindFirst("DonorId");
-           
+
             var Name = identity?.FindFirst(ClaimTypes.Name)?.Value;
             var Email = identity?.FindFirst(ClaimTypes.Email)?.Value;
             var Address = identity?.FindFirst(ClaimTypes.StreetAddress)?.Value;
@@ -187,13 +187,13 @@ namespace Infrastructure.Repo
                     DonorAddress = Address
                 };
 
-                return DonorProfile;
+                return Task.FromResult(DonorProfile); // Wrap the result in a completed Task
             }
             else
             {
                 // Handle case where DonorId claim is not found or cannot be parsed
                 // For example, you can return null or throw an exception
-                return null;
+                return Task.FromResult<Donor>(null); // Return null wrapped in a Task
             }
         }
 
