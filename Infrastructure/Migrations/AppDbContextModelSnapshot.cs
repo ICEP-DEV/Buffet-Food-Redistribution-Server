@@ -128,7 +128,7 @@ namespace Infrastructure.Migrations
                             DonorEmail = "kamomohapi17@gmail.com",
                             DonorName = "Kamohelo",
                             DonorPhoneNum = "0123456789",
-                            Password = "$2a$11$o1L/HAkiHIB.e0AVGIoToevq5JkgrdfA5pF2cJTa5qSLJ5HU6RpNO"
+                            Password = "$2a$11$EVwU9izLoLbZJi8j3VzcreFTipZrdd5DaXP.iuoWW..qtavSLKgYe"
                         },
                         new
                         {
@@ -137,7 +137,7 @@ namespace Infrastructure.Migrations
                             DonorEmail = "tshepo@gmail.com",
                             DonorName = "Tshepo",
                             DonorPhoneNum = "0712563738",
-                            Password = "$2a$11$o1L/HAkiHIB.e0AVGIoToevq5JkgrdfA5pF2cJTa5qSLJ5HU6RpNO"
+                            Password = "$2a$11$EVwU9izLoLbZJi8j3VzcreFTipZrdd5DaXP.iuoWW..qtavSLKgYe"
                         },
                         new
                         {
@@ -146,7 +146,7 @@ namespace Infrastructure.Migrations
                             DonorEmail = "thabo@gmail.com",
                             DonorName = "Thabo",
                             DonorPhoneNum = "0812435627",
-                            Password = "$2a$11$o1L/HAkiHIB.e0AVGIoToevq5JkgrdfA5pF2cJTa5qSLJ5HU6RpNO"
+                            Password = "$2a$11$EVwU9izLoLbZJi8j3VzcreFTipZrdd5DaXP.iuoWW..qtavSLKgYe"
                         });
                 });
 
@@ -250,7 +250,7 @@ namespace Infrastructure.Migrations
                         new
                         {
                             Id = 1,
-                            Password = "$2a$11$o1L/HAkiHIB.e0AVGIoToevq5JkgrdfA5pF2cJTa5qSLJ5HU6RpNO",
+                            Password = "$2a$11$EVwU9izLoLbZJi8j3VzcreFTipZrdd5DaXP.iuoWW..qtavSLKgYe",
                             RecipientAddress = "191 Frederick street",
                             RecipientEmail = "kamomohapi17@gmail.com",
                             RecipientName = "Lesedi",
@@ -259,7 +259,7 @@ namespace Infrastructure.Migrations
                         new
                         {
                             Id = 2,
-                            Password = "$2a$11$o1L/HAkiHIB.e0AVGIoToevq5JkgrdfA5pF2cJTa5qSLJ5HU6RpNO",
+                            Password = "$2a$11$EVwU9izLoLbZJi8j3VzcreFTipZrdd5DaXP.iuoWW..qtavSLKgYe",
                             RecipientAddress = "1921 Maltzan street",
                             RecipientEmail = "karabo@gmail.com",
                             RecipientName = "Karabo",

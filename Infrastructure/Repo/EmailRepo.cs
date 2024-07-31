@@ -105,19 +105,19 @@ namespace Infrastructure.Repo
 
         public async Task<string?> GetRecipientEmail(int requestId)
         {
-            // Get the recipient ID asynchronously
+            
             var recipientId = await _request.GetRecipientIdForDonationRequestAsync(requestId);
 
             if (recipientId.HasValue)
             {
-                // Retrieve the recipient from the database
+                
                 var recipient = await _appDbContext.Recipients.FirstOrDefaultAsync(r => r.Id == recipientId.Value);
 
-                // Return the recipient's email
+                
                 return recipient?.RecipientEmail;
             }
 
-            return null; // Handle the case where recipientId is null or recipient is not found
+            return null; 
         }
 
     public async Task<string> GetRecipientInfo(int requestId)

@@ -3,7 +3,8 @@ using Application.DTOs;
 using Infrastructure.Data;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace FoodShareAPI.Controllers
 {
@@ -50,7 +51,8 @@ namespace FoodShareAPI.Controllers
                 await _email.SendEmailAsync(mailRequest, email);
 
                 return Ok();
-            } catch (Exception ex)
+            }
+            catch (Exception ex)
             {
                 throw;
             }
@@ -58,52 +60,99 @@ namespace FoodShareAPI.Controllers
         }
 
         [HttpPost("RecipientMail")]
-
         public async Task<IActionResult> NotifyRecipient(int requestId)
         {
-            //int requestId = await _request.GetRequestId(donation);
-            string? email = await _email.GetRecipientEmail(requestId);
-            var status = await _request.GetRequestStatus(requestId);
+            try
+            {
+                
+                string? email = await _email.GetRecipientEmail(requestId);
+                var status = await _request.GetRequestStatus(requestId);
+
+                // Handle different statuses
+                switch (status)
+                {
+                    case "Accepted":
+                        await HandleAcceptedStatus(email, requestId);
+                        break;
+
+                    case "Declined":
+                        await HandleDeclinedStatus(email, requestId);
+                        break;
+
+                    default:
+                        return BadRequest("Request status is neither 'Accepted' nor 'Declined'.");
+                }
+
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                // Log the exception or handle it accordingly
+                return StatusCode(StatusCodes.Status500InternalServerError, $"Internal server error: {ex.Message}");
+            }
+        }
+
+       
+        [HttpGet("{requestId}")]
+        public async Task<IActionResult> GetEmail(int requestId)
+        {
+            try
+            {
+                var recipient = await _email.GetRecipientInfo(requestId);
+                if (recipient == null)
+                {
+                    return NotFound($"Email not found for recipient ID {requestId}");
+                }
+
+                return Ok(recipient);
+            }
+            catch (Exception ex)
+            {
+                // Log the exception or handle it accordingly
+                return StatusCode(StatusCodes.Status500InternalServerError, $"Internal server error: {ex.Message}");
+            }
+        }
 
 
+        private async Task HandleAcceptedStatus(string? email, int requestId)
+        {
+            // Define the total time allowed for collection in milliseconds
+            int totalTimeMillis = 300000; // 5 minutes
 
-            RecipientMailDTO recipientMailDTO = new RecipientMailDTO();
+            // Calculate the collection deadline
+            DateTime collectionDeadline = DateTime.UtcNow.AddMilliseconds(totalTimeMillis);
 
-            recipientMailDTO.ToEmail = email;
-            recipientMailDTO.Subject = "Response to your request from Food Share Network";
-            recipientMailDTO.Body = $"We are writing to you to notify you on the response of your request <br/> <br/>" +
-                                    $"Your request has been {status}. you have 30 minutes to collect the food";
+            // Create the recipient mail DTO
+            RecipientMailDTO recipientMailDTO = new RecipientMailDTO
+            {
+                ToEmail = email,
+                Subject = "Response to your request from Food Share Network",
+                Body = $"We are writing to notify you of the response to your request.<br/><br/>" +
+                       $"Your request has been accepted. You have until <strong>{collectionDeadline:MMMM dd, yyyy HH:mm:ss UTC}</strong> to collect the food.<br/><br/>" +
+                       $"Time remaining: <strong>{totalTimeMillis / 60000} minutes</strong>."
+            };
 
+            // Notify recipient
             await _email.NotifyRecipient(recipientMailDTO, requestId);
 
-            return Ok();
+            // Simulate waiting (non-blocking)
+            await Task.Delay(totalTimeMillis); // Delay in milliseconds
         }
 
-
-        [HttpGet]
-        public async Task<IActionResult> GetEmail(int requestid)
+        private async Task HandleDeclinedStatus(string? email, int requestId)
         {
-            //var email = await _email.GetRecipientEmail(id);
-            var recipient = await _email.GetRecipientInfo(requestid);
-            if (recipient == null)
+            // Create the recipient mail DTO for declined status
+            RecipientMailDTO recipientMailDTO = new RecipientMailDTO
             {
-                return NotFound($"Email not found for recipient ID {requestid}");
-            }
+                ToEmail = email,
+                Subject = "Response to your request from Food Share Network",
+                Body = $"We are writing to notify you of the response to your request.<br/><br/>" +
+                       $"Your request has been declined."
+            };
 
-            return Ok(recipient);
+            // Notify recipient
+            await _email.NotifyRecipient(recipientMailDTO, requestId);
         }
 
-      //  [HttpGet("{Id}")]
-        /*public IActionResult GetRecipientInfo(int id) {
-
-            var recipient = _email.GetRecipientInfo(id);
-
-            if(recipient == null)
-            {
-                return NotFound("Not found");
-
-            }
-            return Ok(recipient);
-        }*/
     }
 }

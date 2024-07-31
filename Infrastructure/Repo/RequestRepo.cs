@@ -12,6 +12,7 @@ using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
+using System.Text.Json;
 
 namespace Infrastructure.Repo
 {
@@ -27,32 +28,44 @@ namespace Infrastructure.Repo
         }
         public void CreateRequest(int foodDonationId)
         {
-            var userIdClaim = _httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier);
-
-            if (userIdClaim != null)
+            try
             {
-                // Extract integer value from the claim
-                int recipientId = Convert.ToInt32(userIdClaim.Value); // or int.Parse(userIdClaim.Value)
+                var userIdClaim = _httpContextAccessor.HttpContext?.User?.FindFirst(ClaimTypes.NameIdentifier);
 
-                // Fetch foodDonation from the database
-                var foodDonation = _appDbContext.FoodDonations.FirstOrDefault(fd => fd.DonationId == foodDonationId);
-
-                if (foodDonation != null)
+                if (userIdClaim != null)
                 {
-                    DonationRequest request = new DonationRequest
+                    // Extract integer value from the claim
+                    int recipientId = Convert.ToInt32(userIdClaim.Value); // or int.Parse(userIdClaim.Value)
+
+                    // Fetch foodDonation from the database
+                    var foodDonation = _appDbContext.FoodDonations.FirstOrDefault(fd => fd.DonationId == foodDonationId);
+
+                    if (foodDonation != null)
                     {
-                        DonationId = foodDonation.DonationId, // Ensure DonationId is properly fetched
-                        RecipientId = recipientId,
-                       Status = "pending"
-                    };
+                        DonationRequest request = new DonationRequest
+                        {
+                            DonationId = foodDonation.DonationId, // Ensure DonationId is properly fetched
+                            RecipientId = recipientId,
+                            Status = "pending"
+                        };
 
-                    _appDbContext.DonationRequests.Add(request);
-                    _appDbContext.SaveChanges();
+                        _appDbContext.DonationRequests.Add(request);
+                        _appDbContext.SaveChanges();
+                    }
+                    else
+                    {
+                        throw new InvalidOperationException($"Food donation with ID {foodDonationId} not found.");
+                    }
                 }
-                else
-                {
-                    throw new InvalidOperationException($"Food donation with ID {foodDonationId} not found.");
-                }
+            }
+            catch (Exception ex)
+            {
+                // Log the exception or handle it as needed
+                // For example:
+               // _logger.LogError(ex, "An error occurred while processing the donation request.");
+
+                // Optionally, you can rethrow the exception if needed
+                // throw;
             }
         }
 
@@ -66,14 +79,59 @@ namespace Infrastructure.Repo
             }
         }
 
-        public async Task<int> GetDonorDonation(int itemId)
+        public Task<int> GetDonorDonation(int itemId) // changed to fix warning
         {
-           var donationId =  _appDbContext.FoodDonations.
-                            Where(fd => fd.ItemId == itemId)
-                            .Select(fd => fd.DonationId)
+            var donationId = _appDbContext.FoodDonations
+                             .Where(fd => fd.ItemId == itemId)
+                             .Select(fd => fd.DonationId)
                              .FirstOrDefault();
-                
-            return donationId;    
+
+            return Task.FromResult(donationId);
+        }
+
+        public async Task<List<DonationRequest>> GetDonorRequests()
+        {
+            try
+            {
+                // Retrieve the donor ID from the claims
+                var donorIdClaim = _httpContextAccessor.HttpContext?.User?.FindFirst("DonorId");
+
+                if (donorIdClaim != null && int.TryParse(donorIdClaim.Value, out int donorId))
+                {
+                    // Find the donation associated with the donor
+                    var donation = await _appDbContext.FoodDonations
+                        .FirstOrDefaultAsync(d => d.DonorId == donorId);
+
+                    if (donation != null)
+                    {
+                        // Fetch all requests associated with the donor's donation
+                        var requests = await _appDbContext.DonationRequests
+                            .Where(dr => dr.DonationId == donation.DonationId)
+                            .ToListAsync();
+
+                        // Log the number of records retrieved
+                        Console.WriteLine($"Number of requests retrieved: {requests.Count}");
+
+                        // Log details of each record
+                        foreach (var request in requests)
+                        {
+                            Console.WriteLine($"Request ID: {request.RequestId}, DonationId: {request.DonationId}");
+                        }
+
+                        // Return the list of requests
+                        return requests;
+                    }
+                }
+
+                // Return an empty list if no matching donation or requests are found
+                return new List<DonationRequest>();
+            }
+            catch (Exception ex)
+            {
+                // Log the exception (using Console.WriteLine here; consider using a logging framework in production)
+                Console.WriteLine($"Exception occurred: {ex.Message}");
+                throw new Exception("An error occurred while fetching donor requests.", ex);
+            }
         }
 
         public async Task<int?> GetRequestId(int donationId)

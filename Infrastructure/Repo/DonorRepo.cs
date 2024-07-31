@@ -27,7 +27,7 @@ namespace Infrastructure.Repo
 
 
 
-        private Donor donor;
+       //private Donor donor;
         
         public DonorRepo(AppDbContext appDbContext, IConfiguration configuration, IHttpContextAccessor httpContextAccessor)
         {
@@ -176,11 +176,11 @@ namespace Infrastructure.Repo
             var Address = identity?.FindFirst(ClaimTypes.StreetAddress)?.Value;
             var PhoneNum = identity?.FindFirst(ClaimTypes.MobilePhone)?.Value;
 
-            if (donorIdClaim != null && int.TryParse(donorIdClaim.Value, out int DonorId))
+            if (donorIdClaim != null && int.TryParse(donorIdClaim.Value, out int donorId))
             {
                 var DonorProfile = new Donor
                 {
-                    DonorId = DonorId,
+                    DonorId = donorId,
                     DonorName = Name,
                     DonorEmail = Email,
                     DonorPhoneNum = PhoneNum,
@@ -191,20 +191,22 @@ namespace Infrastructure.Repo
             }
             else
             {
-                // Handle case where DonorId claim is not found or cannot be parsed
-                // For example, you can return null or throw an exception
-                return Task.FromResult<Donor>(null); // Return null wrapped in a Task
+                
+                return Task.FromResult<Donor>(null); 
             }
         }
 
 
-        private async Task<Donor> FindUserByEmail(string email) =>
-           await appDbContext.Donors.FirstOrDefaultAsync(u => u.DonorEmail == email);
-
-       /* public async Task<IActionResult> GetCurrentUser(int id)
+        private async Task<Donor?> FindUserByEmail(string email)
         {
+            var donor = await appDbContext.Donors.FirstOrDefaultAsync(u => u.DonorEmail == email);
+            return donor;  // Donor? indicates that Donor is nullable
+        }
 
-        }*/
-       
+        /* public async Task<IActionResult> GetCurrentUser(int id)
+         {
+
+         }*/
+
     } 
 }

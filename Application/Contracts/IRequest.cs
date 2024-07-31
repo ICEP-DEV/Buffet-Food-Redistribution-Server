@@ -19,5 +19,7 @@ namespace Application.Contracts
 
         Task<int?> GetRecipientIdForDonationRequestAsync(int requestId);
         Task<string> GetRequestStatus(int requestId);
+
+        Task<List<DonationRequest>> GetDonorRequests();
     }
 }

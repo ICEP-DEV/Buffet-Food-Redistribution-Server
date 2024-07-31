@@ -46,8 +46,7 @@ namespace FoodShareAPI.Controllers
                 var donations = donation.GetDonationsAsync();
                 return Ok(donations);
             }
-            catch (Exception ex)
-            {
+            catch             {
                 return StatusCode(500, "An error occurred while fetching donations");
             }
         }

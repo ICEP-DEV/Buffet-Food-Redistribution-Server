@@ -48,13 +48,33 @@ namespace FoodShareAPI.Controllers
             }
         }
 
-        [HttpGet]
+        [HttpGet("DonorRequests")]
+        [Authorize]
 
         public async Task<IActionResult> GetDonationRequests()
         {
             var requests = await _request.GetDonationRequstListAsync();
             return Ok(requests);
            
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetDonorRequests()
+        {
+            try
+            {
+                var donorRequests = await _request.GetDonorRequests();
+
+                // Return OK with the donor requests
+                return Ok(donorRequests);
+            }
+            catch (Exception ex)
+            {
+                // Log the exception (ensure you have a logging mechanism in place)
+                //_logger.LogError(ex, "Error occurred in GetDonorRequests action.");
+                // Return a generic error response
+                return StatusCode(StatusCodes.Status500InternalServerError, "An error occurred while processing your request.");
+            }
         }
     }
 }

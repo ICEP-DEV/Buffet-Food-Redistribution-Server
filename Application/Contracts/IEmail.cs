@@ -13,11 +13,11 @@ namespace Application.Contracts
     {
         Task SendEmailAsync(MailRequestDTO mailRequest, string email);
         Task<string?> GetDonorEmailFromDatabase(string email);
-        Task<string> GetDonorEmail(int donorId);
+        Task<string?> GetDonorEmail(int donorId);
 
         Task NotifyRecipient(RecipientMailDTO mailRecipient, int requestId);
 
-        Task<string> GetRecipientEmail(int requestId);
+        Task<string?> GetRecipientEmail(int requestId);
         Task<string> GetRecipientInfo(int  recipientId);
     }
 }
