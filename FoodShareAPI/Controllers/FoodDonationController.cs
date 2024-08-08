@@ -70,5 +70,15 @@ namespace FoodShareAPI.Controllers
             }
         }
 
+        [HttpGet("total")]
+        public async Task<IActionResult> GetTotalDonations()
+        {
+            // Assuming `donation.GetTotalDonationsCountAsync()` returns an int
+            var totalDonations = await donation.GetTotalDonationsCountAsync();
+
+            // Wrap the integer count in an Ok result
+            return Ok(totalDonations);
+        }
+
     }
 }

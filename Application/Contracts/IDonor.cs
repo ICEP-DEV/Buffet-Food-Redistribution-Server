@@ -24,6 +24,7 @@ namespace Application.Contracts
         Task<int> DeleteDonorAsync(int id);
 
         Task<Donor> GetDonorProfile();
+        Task<int> TotalDonors();
 
         //Task<IAction> GetCurrentUser(int id);
     }

@@ -18,7 +18,7 @@ namespace Application.Contracts
 
         Task <List<Recipient>> GetRecipientListAsync();
 
-        Task<int> UpdateRecipientAsync(int id, Recipient recipient);
+        Task<int> UpdateRecipientAsync( Recipient recipient);
 
         Task <int> DeleteRecipientAsync(int id);
         Task<Recipient> GetRecipientProfile();

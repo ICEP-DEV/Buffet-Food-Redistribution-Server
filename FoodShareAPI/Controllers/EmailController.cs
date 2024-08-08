@@ -117,10 +117,11 @@ namespace FoodShareAPI.Controllers
         private async Task HandleAcceptedStatus(string? email, int requestId)
         {
             // Define the total time allowed for collection in milliseconds
-            int totalTimeMillis = 300000; // 5 minutes
+            int totalTimeMillis = 1800000; // 5 minutes
 
             // Calculate the collection deadline
             DateTime collectionDeadline = DateTime.UtcNow.AddMilliseconds(totalTimeMillis);
+            DateTime collectionDeadlineSast = collectionDeadline.AddHours(2);
 
             // Create the recipient mail DTO
             RecipientMailDTO recipientMailDTO = new RecipientMailDTO
@@ -128,7 +129,7 @@ namespace FoodShareAPI.Controllers
                 ToEmail = email,
                 Subject = "Response to your request from Food Share Network",
                 Body = $"We are writing to notify you of the response to your request.<br/><br/>" +
-                       $"Your request has been accepted. You have until <strong>{collectionDeadline:MMMM dd, yyyy HH:mm:ss UTC}</strong> to collect the food.<br/><br/>" +
+                       $"Your request has been accepted. You have until <strong>{collectionDeadlineSast:MMMM dd, yyyy HH:mm:ss SAST}</strong> to collect the food.<br/><br/>" +
                        $"Time remaining: <strong>{totalTimeMillis / 60000} minutes</strong>."
             };
 

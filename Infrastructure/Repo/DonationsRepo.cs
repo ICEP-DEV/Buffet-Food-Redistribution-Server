@@ -120,6 +120,9 @@ namespace Infrastructure.Repo
         }
 
 
-       
+       public async  Task <int> GetTotalDonationsCountAsync()
+        {
+            return await _appDbContext.FoodDonations.CountAsync();
+        }
     }
 }

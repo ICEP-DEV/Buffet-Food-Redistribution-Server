@@ -50,10 +50,12 @@ namespace FoodShareAPI.Controllers
             return recipient.GetRecipientByEmail(email);
         }
 
-        [HttpPut("{id}")]
-        public async Task <int> UpdateRecipientAsync(int id , Recipient _recipient)
+        [HttpPut]
+        [Authorize]
+        public async Task <int> UpdateRecipientAsync( Recipient _recipient)
         {
-            return await recipient.UpdateRecipientAsync(id, _recipient);
+            var result = await recipient.UpdateRecipientAsync(_recipient);
+            return(result);
         }
 
         [HttpDelete("{id}")]

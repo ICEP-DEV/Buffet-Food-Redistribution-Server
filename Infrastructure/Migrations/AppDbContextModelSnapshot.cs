@@ -128,7 +128,7 @@ namespace Infrastructure.Migrations
                             DonorEmail = "kamomohapi17@gmail.com",
                             DonorName = "Kamohelo",
                             DonorPhoneNum = "0123456789",
-                            Password = "$2a$11$EVwU9izLoLbZJi8j3VzcreFTipZrdd5DaXP.iuoWW..qtavSLKgYe"
+                            Password = "$2a$11$xwwivSlf1JnRxrTln2XQRevPjj/OI6YR4QIZfFn2kH/ERHDZQmJGK"
                         },
                         new
                         {
@@ -137,7 +137,7 @@ namespace Infrastructure.Migrations
                             DonorEmail = "tshepo@gmail.com",
                             DonorName = "Tshepo",
                             DonorPhoneNum = "0712563738",
-                            Password = "$2a$11$EVwU9izLoLbZJi8j3VzcreFTipZrdd5DaXP.iuoWW..qtavSLKgYe"
+                            Password = "$2a$11$xwwivSlf1JnRxrTln2XQRevPjj/OI6YR4QIZfFn2kH/ERHDZQmJGK"
                         },
                         new
                         {
@@ -146,7 +146,7 @@ namespace Infrastructure.Migrations
                             DonorEmail = "thabo@gmail.com",
                             DonorName = "Thabo",
                             DonorPhoneNum = "0812435627",
-                            Password = "$2a$11$EVwU9izLoLbZJi8j3VzcreFTipZrdd5DaXP.iuoWW..qtavSLKgYe"
+                            Password = "$2a$11$xwwivSlf1JnRxrTln2XQRevPjj/OI6YR4QIZfFn2kH/ERHDZQmJGK"
                         });
                 });
 
@@ -202,6 +202,9 @@ namespace Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool>("IsRequested")
+                        .HasColumnType("bit");
+
                     b.Property<string>("ItemName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -250,7 +253,7 @@ namespace Infrastructure.Migrations
                         new
                         {
                             Id = 1,
-                            Password = "$2a$11$EVwU9izLoLbZJi8j3VzcreFTipZrdd5DaXP.iuoWW..qtavSLKgYe",
+                            Password = "$2a$11$xwwivSlf1JnRxrTln2XQRevPjj/OI6YR4QIZfFn2kH/ERHDZQmJGK",
                             RecipientAddress = "191 Frederick street",
                             RecipientEmail = "kamomohapi17@gmail.com",
                             RecipientName = "Lesedi",
@@ -259,7 +262,7 @@ namespace Infrastructure.Migrations
                         new
                         {
                             Id = 2,
-                            Password = "$2a$11$EVwU9izLoLbZJi8j3VzcreFTipZrdd5DaXP.iuoWW..qtavSLKgYe",
+                            Password = "$2a$11$xwwivSlf1JnRxrTln2XQRevPjj/OI6YR4QIZfFn2kH/ERHDZQmJGK",
                             RecipientAddress = "1921 Maltzan street",
                             RecipientEmail = "karabo@gmail.com",
                             RecipientName = "Karabo",

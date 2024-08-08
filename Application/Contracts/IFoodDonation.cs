@@ -15,6 +15,8 @@ namespace Application.Contracts
          IEnumerable<FoodDonationDTO> GetDonationsAsync();
          Task<List<FoodDonationDTO>> GetDonationsForDonorAsync();
 
+        Task<int> GetTotalDonationsCountAsync();
+
 
         //Task AddFoodDonationAsync(int donorId, int foodItemId, int quantity, DateTime dateCooked);
     }

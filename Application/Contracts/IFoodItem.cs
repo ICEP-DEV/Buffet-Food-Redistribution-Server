@@ -14,6 +14,10 @@ namespace Application.Contracts
         Task AddFoodItemsAsync(FoodItem foodItem); 
         Task<IEnumerable<FoodItem>> GetFoodItemsAsync();
 
+        Task<int> GetTotalQuantity();
+
+      
+ 
         //Task<int> DeleteItemAsync(int id);
     }
 }

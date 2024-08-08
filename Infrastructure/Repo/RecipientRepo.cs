@@ -85,10 +85,12 @@ namespace Infrastructure.Repo
             return result;
         }
 
-        public async Task<int> UpdateRecipientAsync(int id, Recipient recipient)
+        public async Task<int> UpdateRecipientAsync( Recipient recipient)
         {
             string message = string.Empty;
             var userIdClaim = _httpContextAccessor?.HttpContext?.User.FindFirst(ClaimTypes.NameIdentifier);
+
+            
 
             if (userIdClaim == null || !int.TryParse(userIdClaim.Value, out int userId))
             {
@@ -102,7 +104,7 @@ namespace Infrastructure.Repo
             }
 
             // Perform the update operation
-            var result = await _appDbContext.Recipients.Where(u => u.Id == id)
+            var result = await _appDbContext.Recipients.Where(u => u.Id == userId)
                 .ExecuteUpdateAsync(setters => setters
                     .SetProperty(u => u.RecipientName, recipient.RecipientName)
                     .SetProperty(u => u.RecipientEmail, recipient.RecipientEmail)

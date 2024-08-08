@@ -16,33 +16,14 @@ namespace Infrastructure.Repo
     {
 
         private readonly AppDbContext _appDbContext;
+  
         
         public FoodItemRepo(AppDbContext appDbContext)
         {
             this._appDbContext = appDbContext;
            
         }
-        /*public bool AddFoodItem(FoodItem item, string imagePath)
-        {
-            
-            try
-            {
-                item.ItemImage = imagePath;
-                item.ItemName = item.ItemName;
-                item.Quantity = item.Quantity;
-                item.DateCooked = item.DateCooked;
-                item.Description = item.Description;
-                _appDbContext.FoodItems.Add(item);   
 
-               
-              _appDbContext.SaveChanges();
-                return true;
-            }
-            catch(Exception ex) 
-            {
-                return false;
-            }   
-        }*/
 
         //Authorized users add food items
         public async Task AddFoodItemsAsync(FoodItem foodItem)
@@ -51,16 +32,17 @@ namespace Infrastructure.Repo
             await _appDbContext.SaveChangesAsync();
         }
 
-        /*public async Task<int> AddFoodItemAsync(FoodItem foodItem)
+        public async Task<int> GetTotalQuantity()
         {
-           _appDbContext.FoodItems.Add(foodItem);
-            await _appDbContext.SaveChangesAsync();
-            return foodItem.Id;
-        }*/
+            return await _appDbContext.FoodItems.SumAsync(f => f.Quantity);
+        }
 
         public async Task<IEnumerable<FoodItem>> GetFoodItemsAsync()
         {
-            return await _appDbContext.FoodItems.ToListAsync();
+
+            return await _appDbContext.FoodItems
+                              .Where(fi => !fi.IsRequested) // Filter where IsRequested is false
+                              .ToListAsync();
         }
     }
 }

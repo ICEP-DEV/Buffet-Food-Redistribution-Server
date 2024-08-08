@@ -60,22 +60,39 @@ namespace Infrastructure.Repo
             }
             catch (Exception ex)
             {
-                // Log the exception or handle it as needed
-                // For example:
-               // _logger.LogError(ex, "An error occurred while processing the donation request.");
-
-                // Optionally, you can rethrow the exception if needed
-                // throw;
+               
             }
         }
 
         public void UpdateDonationRequestStatus(int donationRequestId, string newStatus)
         {
-            var donationRequest = _appDbContext.DonationRequests.Find(donationRequestId);
+            // Retrieve the donation request
+            var donationRequest = _appDbContext.DonationRequests
+                .FirstOrDefault(dr => dr.RequestId == donationRequestId);
+
             if (donationRequest != null)
             {
+                // Update the status of the donation request
                 donationRequest.Status = newStatus;
                 _appDbContext.SaveChanges();
+
+                // If the new status is "Accepted", update the related FoodItems
+                if (newStatus == "Accepted")
+                {
+                    // Find all related FoodItems (assuming you have a relationship or a way to get related items)
+                    var foodItems = _appDbContext.FoodItems
+                        .Where(fi => fi.Id == donationRequestId) // Adjust this as necessary
+                        .ToList();
+
+                    foreach (var foodItem in foodItems)
+                    {
+                        // Update the isRequested attribute
+                        foodItem.IsRequested = true;
+                    }
+
+                    // Save changes for the updated FoodItems
+                    _appDbContext.SaveChanges();
+                }
             }
         }
 

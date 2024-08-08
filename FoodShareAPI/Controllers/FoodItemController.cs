@@ -36,7 +36,6 @@ namespace FoodShareAPI.Controllers
 
 
 
-
        // [HttpPost("AddItem")]
         /*public async Task<IActionResult> AddFoodItem([FromBody] FoodItem item)
         {
@@ -76,6 +75,15 @@ namespace FoodShareAPI.Controllers
 
             return result;
 
+        }
+
+        [HttpGet("TotalQuantity")]
+
+        public async Task <IActionResult> GetTotalQuantity()
+        {
+            var totalQuantity = await _foodItem.GetTotalQuantity();
+
+            return Ok (totalQuantity);
         }
 
     }

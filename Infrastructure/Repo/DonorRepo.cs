@@ -121,8 +121,11 @@ namespace Infrastructure.Repo
             return result;
         }
 
-
-       public async Task<int> DeleteDonorAsync(int id)
+        public async Task<int> TotalDonors()
+        {
+            return await appDbContext.Donors.CountAsync();
+        }
+        public async Task<int> DeleteDonorAsync(int id)
         {
             var donorIdClaim = _httpContextAccessor.HttpContext?.User?.FindFirst("DonorId");
 

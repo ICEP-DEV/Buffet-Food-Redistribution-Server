@@ -93,5 +93,14 @@ namespace FoodShareAPI.Controllers
                 return NotFound(); // Return 404 Not Found if donor profile not found
             }
         }
+
+        [HttpGet("TotalDonors")]
+
+        public async Task <IActionResult> TotalDonors()
+        {
+            var totalDonors = await donor.TotalDonors();
+
+            return Ok(totalDonors);
+        }
     }
 }

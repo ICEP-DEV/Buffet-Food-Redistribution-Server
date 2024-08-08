@@ -24,6 +24,8 @@ namespace Domain.Entities
 
         public string Contact { get; set; } = string.Empty;
 
+        public bool IsRequested { get; set; } = false;
+
         //public string ItemImage { get; set; } = string.Empty;
 
 
