@@ -76,5 +76,32 @@ namespace FoodShareAPI.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, "An error occurred while processing your request.");
             }
         }
+
+        [HttpGet("AcceptedRequests")]
+
+        public Task<List<DonationRequest>> GetAcceptedRequests()
+        {
+            var acceptedRequests = _request.GetAcceptedHistory();
+
+            return acceptedRequests;
+        }
+
+        [HttpGet("DeclinedRequests")]
+
+        public Task<List<DonationRequest>> GetDeclinedRequests()
+        {
+            var acceptedRequests = _request.GetDeclinedHistory();
+
+            return acceptedRequests;
+        }
+
+        [HttpGet("PendingRequests")]
+
+        public Task<List<DonationRequest>> GetPendingRequests()
+        {
+            var acceptedRequests = _request.GetPendingHistory();
+
+            return acceptedRequests;
+        }
     }
 }

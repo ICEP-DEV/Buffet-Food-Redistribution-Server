@@ -56,7 +56,7 @@ namespace Infrastructure.Migrations
                             AdminId = 1,
                             Email = "admin@gmail.com",
                             Name = "admin",
-                            Password = "admin",
+                            Password = "$2a$11$0LGgPkhgMLCkFpQ9fkdcye1ISQdQpCzmwXCIOhSBuHdGEaOjhtkuy",
                             Phone = "0126547380"
                         });
                 });
@@ -128,7 +128,7 @@ namespace Infrastructure.Migrations
                             DonorEmail = "kamomohapi17@gmail.com",
                             DonorName = "Kamohelo",
                             DonorPhoneNum = "0123456789",
-                            Password = "$2a$11$xwwivSlf1JnRxrTln2XQRevPjj/OI6YR4QIZfFn2kH/ERHDZQmJGK"
+                            Password = "$2a$11$0LGgPkhgMLCkFpQ9fkdcye1ISQdQpCzmwXCIOhSBuHdGEaOjhtkuy"
                         },
                         new
                         {
@@ -137,7 +137,7 @@ namespace Infrastructure.Migrations
                             DonorEmail = "tshepo@gmail.com",
                             DonorName = "Tshepo",
                             DonorPhoneNum = "0712563738",
-                            Password = "$2a$11$xwwivSlf1JnRxrTln2XQRevPjj/OI6YR4QIZfFn2kH/ERHDZQmJGK"
+                            Password = "$2a$11$0LGgPkhgMLCkFpQ9fkdcye1ISQdQpCzmwXCIOhSBuHdGEaOjhtkuy"
                         },
                         new
                         {
@@ -146,7 +146,7 @@ namespace Infrastructure.Migrations
                             DonorEmail = "thabo@gmail.com",
                             DonorName = "Thabo",
                             DonorPhoneNum = "0812435627",
-                            Password = "$2a$11$xwwivSlf1JnRxrTln2XQRevPjj/OI6YR4QIZfFn2kH/ERHDZQmJGK"
+                            Password = "$2a$11$0LGgPkhgMLCkFpQ9fkdcye1ISQdQpCzmwXCIOhSBuHdGEaOjhtkuy"
                         });
                 });
 
@@ -217,6 +217,52 @@ namespace Infrastructure.Migrations
                     b.ToTable("FoodItems");
                 });
 
+            modelBuilder.Entity("Domain.Entities.Organization", b =>
+                {
+                    b.Property<int>("OrganizationId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("OrganizationId"));
+
+                    b.Property<string>("OrganizationName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Regno")
+                        .HasColumnType("int");
+
+                    b.HasKey("OrganizationId");
+
+                    b.ToTable("Organizations");
+
+                    b.HasData(
+                        new
+                        {
+                            OrganizationId = 1,
+                            OrganizationName = "Sizwe Old Age Home",
+                            Regno = 112233
+                        },
+                        new
+                        {
+                            OrganizationId = 2,
+                            OrganizationName = "Ubuntu Old Age Home",
+                            Regno = 223344
+                        },
+                        new
+                        {
+                            OrganizationId = 3,
+                            OrganizationName = "Kids of tomorrow Children's Home",
+                            Regno = 334455
+                        },
+                        new
+                        {
+                            OrganizationId = 4,
+                            OrganizationName = "Little lamb Children's Home",
+                            Regno = 445566
+                        });
+                });
+
             modelBuilder.Entity("Domain.Entities.Recipient", b =>
                 {
                     b.Property<int>("Id")
@@ -253,7 +299,7 @@ namespace Infrastructure.Migrations
                         new
                         {
                             Id = 1,
-                            Password = "$2a$11$xwwivSlf1JnRxrTln2XQRevPjj/OI6YR4QIZfFn2kH/ERHDZQmJGK",
+                            Password = "$2a$11$0LGgPkhgMLCkFpQ9fkdcye1ISQdQpCzmwXCIOhSBuHdGEaOjhtkuy",
                             RecipientAddress = "191 Frederick street",
                             RecipientEmail = "kamomohapi17@gmail.com",
                             RecipientName = "Lesedi",
@@ -262,7 +308,7 @@ namespace Infrastructure.Migrations
                         new
                         {
                             Id = 2,
-                            Password = "$2a$11$xwwivSlf1JnRxrTln2XQRevPjj/OI6YR4QIZfFn2kH/ERHDZQmJGK",
+                            Password = "$2a$11$0LGgPkhgMLCkFpQ9fkdcye1ISQdQpCzmwXCIOhSBuHdGEaOjhtkuy",
                             RecipientAddress = "1921 Maltzan street",
                             RecipientEmail = "karabo@gmail.com",
                             RecipientName = "Karabo",

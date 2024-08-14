@@ -110,55 +110,39 @@ namespace Infrastructure.Repo
         {
             try
             {
-                // Retrieve the donor ID from the claims
                 var donorIdClaim = _httpContextAccessor.HttpContext?.User?.FindFirst("DonorId");
 
                 if (donorIdClaim != null && int.TryParse(donorIdClaim.Value, out int donorId))
                 {
-                    // Find the donation associated with the donor
                     var donation = await _appDbContext.FoodDonations
                         .FirstOrDefaultAsync(d => d.DonorId == donorId);
 
                     if (donation != null)
                     {
-                        // Fetch all requests associated with the donor's donation
                         var requests = await _appDbContext.DonationRequests
                             .Where(dr => dr.DonationId == donation.DonationId)
                             .ToListAsync();
 
-                        // Log the number of records retrieved
                         Console.WriteLine($"Number of requests retrieved: {requests.Count}");
 
-                        // Log details of each record
                         foreach (var request in requests)
                         {
                             Console.WriteLine($"Request ID: {request.RequestId}, DonationId: {request.DonationId}");
                         }
-
-                        // Return the list of requests
                         return requests;
                     }
                 }
-
-                // Return an empty list if no matching donation or requests are found
                 return new List<DonationRequest>();
             }
             catch (Exception ex)
             {
-                // Log the exception (using Console.WriteLine here; consider using a logging framework in production)
                 Console.WriteLine($"Exception occurred: {ex.Message}");
                 throw new Exception("An error occurred while fetching donor requests.", ex);
             }
         }
 
         public async Task<int?> GetRequestId(int donationId)
-        {
-            /*var requestId = await _appDbContext.DonationRequests
-                             .Where(dr => dr.DonationId == donationId)
-                             .Select(dr => (int?)dr.RequestId) // Cast to int? for nullable return
-                             .FirstOrDefaultAsync();
-            return requestId;*/
-
+        { 
             var requestId = await _appDbContext.DonationRequests.FirstOrDefaultAsync(d => d.DonationId == donationId);
 
             return requestId != null ? requestId.RequestId : (int?) null;
@@ -168,8 +152,6 @@ namespace Infrastructure.Repo
         {
             var request = await _appDbContext.DonationRequests
                                              .FirstOrDefaultAsync(dr => dr.RequestId == requestId);
-
-            // Check if request is not null, then return RecipientId, otherwise return null
             return request != null ? request.RecipientId : (int?)null;
         }
 
@@ -177,22 +159,48 @@ namespace Infrastructure.Repo
         {
             var donationRequest = await _appDbContext.DonationRequests.FirstOrDefaultAsync(dr => dr.RequestId == requestId);
 
-            // Check if donationRequest is null (no matching request found)
             if (donationRequest != null)
             {
                 return donationRequest.Status;
             }
             else
             {
-                return string.Empty; // Return empty string if no request with matching requestId is found
+                return string.Empty; 
             }
         }
 
         public async Task<List<DonationRequest>> GetDonationRequstListAsync()
         {
             var result = await _appDbContext.DonationRequests.ToListAsync();
+
             return result;
         }
 
+        public async Task<List<DonationRequest>> GetAcceptedHistory()
+        {
+            var acceptedDonations = await _appDbContext.DonationRequests
+                                                .Where(dr => dr.Status == "Accepted")
+                                                .ToListAsync();
+            
+            return acceptedDonations;
+        }
+
+        public async Task<List<DonationRequest>> GetDeclinedHistory()
+        {
+            var declinedDonations = await _appDbContext.DonationRequests
+                                                .Where(dr => dr.Status == "Declined")
+                                                .ToListAsync();
+
+            return declinedDonations;
+        }
+
+        public async Task<List<DonationRequest>> GetPendingHistory()
+        {
+            var pendingDonations = await _appDbContext.DonationRequests
+                                                .Where(dr => dr.Status == "Pending")
+                                                .ToListAsync();
+
+            return pendingDonations;
+        }
     }
 }

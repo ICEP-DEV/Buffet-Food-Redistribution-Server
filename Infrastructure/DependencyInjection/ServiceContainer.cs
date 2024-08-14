@@ -52,7 +52,7 @@ namespace Infrastructure.DependencyInjection
             services.AddScoped<IEmail,EmailRepo>();
             services.AddScoped<IRequest, RequestRepo>();
             services.AddScoped<IAdmin, AdminRepo>();
-
+            services.AddScoped<IVerification, VerificationRepo>();
 
             return services;
         }

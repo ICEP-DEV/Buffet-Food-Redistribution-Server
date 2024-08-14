@@ -21,5 +21,12 @@ namespace Application.Contracts
         Task<string> GetRequestStatus(int requestId);
 
         Task<List<DonationRequest>> GetDonorRequests();
+
+        Task<List<DonationRequest>> GetAcceptedHistory();
+
+        Task<List<DonationRequest>> GetDeclinedHistory();
+
+        Task<List<DonationRequest>> GetPendingHistory();
+
     }
 }

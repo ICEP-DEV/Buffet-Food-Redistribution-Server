@@ -20,6 +20,8 @@ namespace Infrastructure.Data
 
         public DbSet<DonationRequest> DonationRequests { get; set; }
 
+        public DbSet<Organization> Organizations { get; set; }
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -68,13 +70,47 @@ namespace Infrastructure.Data
                     Name = "admin",
                     Email = "admin@gmail.com",
                     Phone = "0126547380",
-                    Password = "admin"
+                    Password = hashedPassword
                 }
-                
+                );
+
+            modelBuilder.Entity<Organization>().HasData(
+
+                new Organization
+                {
+                    OrganizationId = 1,
+                    OrganizationName = "Sizwe Old Age Home",
+                    Regno = 112233
+
+                },
+                 new Organization
+                 {
+                     OrganizationId = 2,
+                     OrganizationName = "Ubuntu Old Age Home",
+                     Regno = 223344
+
+                 },
+                  new Organization
+                  {
+                      OrganizationId = 3,
+                      OrganizationName = "Kids of tomorrow Children's Home",
+                      Regno = 334455
+
+                  },
+
+                   new Organization
+                   {
+                       OrganizationId = 4,
+                       OrganizationName = "Little lamb Children's Home",
+                       Regno = 445566
+
+                   }
+
                 );
 
 
-            
+
+
         }
 
     }
