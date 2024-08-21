@@ -56,7 +56,7 @@ namespace Infrastructure.Migrations
                             AdminId = 1,
                             Email = "admin@gmail.com",
                             Name = "admin",
-                            Password = "$2a$11$0LGgPkhgMLCkFpQ9fkdcye1ISQdQpCzmwXCIOhSBuHdGEaOjhtkuy",
+                            Password = "$2a$11$3PyWrlP14zc9i7WYKErxiesxDnJKoLehHK/caePPp8dg5pbjHmPwi",
                             Phone = "0126547380"
                         });
                 });
@@ -78,6 +78,9 @@ namespace Infrastructure.Migrations
                     b.Property<string>("Status")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("isCollected")
+                        .HasColumnType("bit");
 
                     b.HasKey("RequestId");
 
@@ -128,7 +131,7 @@ namespace Infrastructure.Migrations
                             DonorEmail = "kamomohapi17@gmail.com",
                             DonorName = "Kamohelo",
                             DonorPhoneNum = "0123456789",
-                            Password = "$2a$11$0LGgPkhgMLCkFpQ9fkdcye1ISQdQpCzmwXCIOhSBuHdGEaOjhtkuy"
+                            Password = "$2a$11$3PyWrlP14zc9i7WYKErxiesxDnJKoLehHK/caePPp8dg5pbjHmPwi"
                         },
                         new
                         {
@@ -137,7 +140,7 @@ namespace Infrastructure.Migrations
                             DonorEmail = "tshepo@gmail.com",
                             DonorName = "Tshepo",
                             DonorPhoneNum = "0712563738",
-                            Password = "$2a$11$0LGgPkhgMLCkFpQ9fkdcye1ISQdQpCzmwXCIOhSBuHdGEaOjhtkuy"
+                            Password = "$2a$11$3PyWrlP14zc9i7WYKErxiesxDnJKoLehHK/caePPp8dg5pbjHmPwi"
                         },
                         new
                         {
@@ -146,7 +149,7 @@ namespace Infrastructure.Migrations
                             DonorEmail = "thabo@gmail.com",
                             DonorName = "Thabo",
                             DonorPhoneNum = "0812435627",
-                            Password = "$2a$11$0LGgPkhgMLCkFpQ9fkdcye1ISQdQpCzmwXCIOhSBuHdGEaOjhtkuy"
+                            Password = "$2a$11$3PyWrlP14zc9i7WYKErxiesxDnJKoLehHK/caePPp8dg5pbjHmPwi"
                         });
                 });
 
@@ -299,7 +302,7 @@ namespace Infrastructure.Migrations
                         new
                         {
                             Id = 1,
-                            Password = "$2a$11$0LGgPkhgMLCkFpQ9fkdcye1ISQdQpCzmwXCIOhSBuHdGEaOjhtkuy",
+                            Password = "$2a$11$3PyWrlP14zc9i7WYKErxiesxDnJKoLehHK/caePPp8dg5pbjHmPwi",
                             RecipientAddress = "191 Frederick street",
                             RecipientEmail = "kamomohapi17@gmail.com",
                             RecipientName = "Lesedi",
@@ -308,7 +311,7 @@ namespace Infrastructure.Migrations
                         new
                         {
                             Id = 2,
-                            Password = "$2a$11$0LGgPkhgMLCkFpQ9fkdcye1ISQdQpCzmwXCIOhSBuHdGEaOjhtkuy",
+                            Password = "$2a$11$3PyWrlP14zc9i7WYKErxiesxDnJKoLehHK/caePPp8dg5pbjHmPwi",
                             RecipientAddress = "1921 Maltzan street",
                             RecipientEmail = "karabo@gmail.com",
                             RecipientName = "Karabo",

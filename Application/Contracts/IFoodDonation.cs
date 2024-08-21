@@ -17,6 +17,13 @@ namespace Application.Contracts
 
         Task<int> GetTotalDonationsCountAsync();
 
+        Task<Dictionary<string, int>> GetMonthlyTotalDonationsAsync();
+
+        Task<Dictionary<string, int>> GetWeeklyTotalDonationsAsync();
+
+        Task<Dictionary<string, int>> GetMonthlyTotalFromWeeklyTotalsAsync();
+
+        Task<List<FoodItem>> DonorFood();
 
         //Task AddFoodDonationAsync(int donorId, int foodItemId, int quantity, DateTime dateCooked);
     }

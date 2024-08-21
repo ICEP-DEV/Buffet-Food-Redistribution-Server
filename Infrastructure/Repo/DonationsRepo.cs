@@ -5,6 +5,8 @@ using Infrastructure.Data;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Nest;
+using System.Globalization;
 using System.Security.Claims;
 
 
@@ -63,6 +65,7 @@ namespace Infrastructure.Repo
             try
             {
                 var donorIdClaim = _httpContextAccessor.HttpContext.User.FindFirst("DonorId");
+                var identity = _httpContextAccessor.HttpContext?.User?.Identity as ClaimsIdentity;
 
                 if (donorIdClaim == null)
                 {
@@ -71,6 +74,7 @@ namespace Infrastructure.Repo
 
                 // Retrieve the donorId as a string
                 var donorIdString = donorIdClaim.Value;
+                var DonorName = identity?.FindFirst(ClaimTypes.Name)?.Value;
 
                 // Convert donorIdString to int
                 if (!int.TryParse(donorIdString, out int donorId))
@@ -85,6 +89,7 @@ namespace Infrastructure.Repo
                                        {
                                            DonorId = donorId,
                                            ItemId = foodItem.Id,
+                                           Name = DonorName,
                                            Quantity = donation.Quantity,
                                            DateCooked = donation.DateCooked
                                        }).ToListAsync();
@@ -101,8 +106,41 @@ namespace Infrastructure.Repo
             }
         }
 
+        public async Task<List<FoodItem>> DonorFood()
+        {
+            // Retrieve the donor ID from the claims
+            var donorIdClaim = _httpContextAccessor.HttpContext.User.FindFirst("DonorId");
 
-         public IEnumerable<FoodDonationDTO> GetDonationsAsync()
+            if (donorIdClaim == null)
+            {
+                throw new InvalidOperationException("User's donor ID not found in claims.");
+            }
+
+            var donorIdString = donorIdClaim.Value;
+
+            if (!int.TryParse(donorIdString, out int donorId))
+            {
+                throw new InvalidOperationException("Unable to parse donor ID as integer.");
+            }
+
+            // Query the FoodDonations table for food items associated with the donor ID
+            var itemId = await _appDbContext.FoodDonations
+                .Where(fd => fd.DonorId == donorId)
+                .Select(fd => fd.ItemId) // Assuming FoodItem is a navigation property or you need to select the items specifically
+                .ToListAsync();
+
+            var foodItems = await (from fi in _appDbContext.FoodItems
+                                   join dr in _appDbContext.DonationRequests
+                                   on fi.Id equals dr.RequestId
+                                   where itemId.Contains(fi.Id)
+                                         && dr.isCollected == false
+                                   select fi)
+                    .ToListAsync();
+
+            return foodItems;
+        }
+
+        public IEnumerable<FoodDonationDTO> GetDonationsAsync()
         
         {
             var donations = (from donation in _appDbContext.FoodDonations
@@ -123,6 +161,130 @@ namespace Infrastructure.Repo
        public async  Task <int> GetTotalDonationsCountAsync()
         {
             return await _appDbContext.FoodDonations.CountAsync();
+        }
+
+
+        public async Task<Dictionary<string, int>> GetMonthlyTotalFromWeeklyTotalsAsync()
+        {
+            // Step 1: Calculate Weekly Totals
+            var weeklyTotals = await _appDbContext.FoodDonations
+                .Select(d => new
+                {
+                    // Calculate the start of the week based on Monday
+                    WeekStart = d.DateCooked.AddDays(-(int)d.DateCooked.DayOfWeek + (int)DayOfWeek.Monday).Date,
+                    Month = d.DateCooked.Month,
+                    Year = d.DateCooked.Year,
+                    d.Quantity
+                })
+                .GroupBy(g => new { g.WeekStart, g.Month, g.Year })
+                .Select(g => new
+                {
+                    g.Key.WeekStart,
+                    g.Key.Month,
+                    g.Key.Year,
+                    TotalQuantity = g.Sum(x => x.Quantity)
+                })
+                .ToListAsync();
+
+            // Step 2: Aggregate Weekly Totals into Monthly Totals
+            var monthlyTotals = weeklyTotals
+                .GroupBy(w => new { w.Year, w.Month })
+                .Select(g => new
+                {
+                    MonthYear = $"{g.Key.Year}-{g.Key.Month:D2}",
+                    TotalQuantity = g.Sum(x => x.TotalQuantity)
+                })
+                .ToList();
+
+            return monthlyTotals.ToDictionary(r => r.MonthYear, r => r.TotalQuantity);
+        }
+
+       /* public async Task<Dictionary<string, int>> GetMonthlyTotalFromWeeklyTotalsAsync()
+        {
+            // Retrieve data from the database
+            var donations = await _appDbContext.FoodDonations
+                .Select(d => new
+                {
+                    d.DateCooked,
+                    d.Quantity
+                })
+                .ToListAsync();
+
+            // Perform weekly and monthly calculations in memory
+            var weeklyTotals = donations
+                .GroupBy(d => new
+                {
+                    Year = d.DateCooked.Year,
+                    Week = CultureInfo.InvariantCulture.Calendar.GetWeekOfYear(
+                        d.DateCooked, CalendarWeekRule.FirstDay, DayOfWeek.Monday)
+                })
+                .Select(g => new
+                {
+                    Year = g.Key.Year,
+                    Week = g.Key.Week,
+                    TotalQuantity = g.Sum(d => d.Quantity)
+                })
+                .ToList();
+
+            var monthlyTotals = weeklyTotals
+                .GroupBy(w => new
+                {
+                    Year = w.Year,
+                    Month = new DateTime(w.Year, 1, 1).AddDays((w.Week - 1) * 7).Month
+                })
+                .Select(g => new
+                {
+                    MonthYear = $"{g.Key.Year}-{g.Key.Month:D2}",
+                    TotalQuantity = g.Sum(w => w.TotalQuantity)
+                })
+                .ToList();
+
+            return monthlyTotals.ToDictionary(r => r.MonthYear, r => r.TotalQuantity);
+        }*/
+
+        public async Task<Dictionary<string, int>> GetWeeklyTotalDonationsAsync()
+        {
+            var result = await _appDbContext.FoodDonations
+                .Select(d => new
+                {
+                    Year = d.DateCooked.Year,
+                    Week = (int)Math.Floor((d.DateCooked.DayOfYear - 1) / 7.0) + 1,
+                    d.Quantity
+                })
+                .GroupBy(g => new { g.Year, g.Week })
+                .Select(g => new
+                {
+                    YearWeek = $"{g.Key.Year}-W{g.Key.Week:D2}",
+                    TotalQuantity = g.Sum(x => x.Quantity)
+                })
+                .ToListAsync();
+
+            return result.ToDictionary(r => r.YearWeek, r => r.TotalQuantity);
+        }
+       
+
+        public async Task<Dictionary<string, int>> GetMonthlyTotalDonationsAsync()
+        {
+            var result = await _appDbContext.FoodDonations
+                .GroupBy(d => new { Year = d.DateCooked.Year, Month = d.DateCooked.Month })
+                .Select(g => new
+                {
+                    YearMonth = $"{g.Key.Year}-{g.Key.Month:D2}",
+                    TotalQuantity = g.Sum(d => d.Quantity)
+                })
+                .ToListAsync();
+
+            return result.ToDictionary(r => r.YearMonth, r => r.TotalQuantity);
+        }
+    }
+    //Methods
+
+    public static class DateTimeExtensions
+    {
+        public static DateTime StartOfWeek(this DateTime dt, DayOfWeek startOfWeek)
+        {
+            int diff = (7 + (dt.DayOfWeek - startOfWeek)) % 7;
+            return dt.AddDays(-1 * diff).Date;
         }
     }
 }

@@ -32,7 +32,7 @@ namespace FoodShareAPI.Controllers
         [HttpPost("populate")]
         public IActionResult PopulateFoodDonations([FromBody] FoodItem foodItems)
         {
-            donation.PopulateFoodDonations( foodItems);
+            donation.PopulateFoodDonations(foodItems);
 
             return Ok("Food donations populated successfully.");
         }
@@ -46,8 +46,30 @@ namespace FoodShareAPI.Controllers
                 var donations = donation.GetDonationsAsync();
                 return Ok(donations);
             }
-            catch             {
+            catch {
                 return StatusCode(500, "An error occurred while fetching donations");
+            }
+        }
+
+        [HttpGet("Donor-Items")]
+        [Authorize]
+         public async Task<ActionResult>DonorFood()
+         {
+            try
+            {
+                // Assuming donation is a service that handles the logic for fetching donor's food items.
+                var foodItems = await donation.DonorFood();
+
+                if (foodItems == null || !foodItems.Any())
+                {
+                    return NotFound("No food items found for the donor.");
+                }
+
+                return Ok(foodItems);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, "An error occurred while processing your request.");
             }
         }
 
@@ -80,5 +102,25 @@ namespace FoodShareAPI.Controllers
             return Ok(totalDonations);
         }
 
+        [HttpGet("monthly-totals")]
+        public async Task<IActionResult> GetMonthlyTotals()
+        {
+            var monthlyTotals = await donation.GetMonthlyTotalDonationsAsync();
+            return Ok(monthlyTotals);
+        }
+
+        [HttpGet("weekly-totals")]
+        public async Task<IActionResult> GetWeeklyTotals()
+        {
+            var weeklyTotals = await donation.GetWeeklyTotalDonationsAsync();
+            return Ok(weeklyTotals);
+        }
+
+        [HttpGet("monthly2-totals")]
+        public async Task<IActionResult> GetMonthly2Totals()
+        {
+            var monthlyTotals = await donation.GetMonthlyTotalFromWeeklyTotalsAsync();
+            return Ok(monthlyTotals);
+        }
     }
 }

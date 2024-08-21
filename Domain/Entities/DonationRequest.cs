@@ -24,5 +24,7 @@ namespace Domain.Entities
         public Recipient? Recipient { get; set; }
 
         public string Status { get; set; } = string.Empty;
+
+        public bool isCollected { get; set; } = false;
     }
 }

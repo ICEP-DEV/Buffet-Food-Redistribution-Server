@@ -28,5 +28,6 @@ namespace Application.Contracts
 
         Task<List<DonationRequest>> GetPendingHistory();
 
+        void UpdateCollectionStatus(int donationRequestId);
     }
 }

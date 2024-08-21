@@ -46,7 +46,7 @@ namespace Infrastructure.Repo
                         {
                             DonationId = foodDonation.DonationId, // Ensure DonationId is properly fetched
                             RecipientId = recipientId,
-                            Status = "pending"
+                            Status = "pending",
                         };
 
                         _appDbContext.DonationRequests.Add(request);
@@ -93,6 +93,18 @@ namespace Infrastructure.Repo
                     // Save changes for the updated FoodItems
                     _appDbContext.SaveChanges();
                 }
+            }
+        }
+
+        public void UpdateCollectionStatus(int donationRequestId)
+        {
+            var donationRequest = _appDbContext.DonationRequests
+                .FirstOrDefault(dr => dr.RequestId == donationRequestId);
+
+            if (donationRequest != null)
+            {
+                donationRequest.isCollected = true;
+                _appDbContext.SaveChanges(true);
             }
         }
 
@@ -187,6 +199,9 @@ namespace Infrastructure.Repo
 
         public async Task<List<DonationRequest>> GetDeclinedHistory()
         {
+            int recipientId;
+
+
             var declinedDonations = await _appDbContext.DonationRequests
                                                 .Where(dr => dr.Status == "Declined")
                                                 .ToListAsync();

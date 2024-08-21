@@ -32,6 +32,20 @@ namespace FoodShareAPI.Controllers
                 return StatusCode(500, $"Internal server error: {ex.Message}");
             }
         }
+        [HttpPut("updateCollection/{donationRequestId}")]
+
+        public IActionResult UpdateCollection(int donationRequestId)
+        {
+            try
+            {
+                _request.UpdateCollectionStatus(donationRequestId);
+                return Ok($"Collection status updated successfully");
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Internal server error: {ex.Message}");
+            }
+        }
 
         [HttpPut("updatestatus/{donationRequestId}")]
 
@@ -70,9 +84,7 @@ namespace FoodShareAPI.Controllers
             }
             catch (Exception ex)
             {
-                // Log the exception (ensure you have a logging mechanism in place)
-                //_logger.LogError(ex, "Error occurred in GetDonorRequests action.");
-                // Return a generic error response
+               
                 return StatusCode(StatusCodes.Status500InternalServerError, "An error occurred while processing your request.");
             }
         }
