@@ -1,8 +1,10 @@
 ﻿using Application.Contracts;
 using Application.DTOs;
+using Domain.Entities;
 using Infrastructure.Data;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -38,25 +40,59 @@ namespace FoodShareAPI.Controllers
                 int? requestId = await _request.GetRequestId(donation);
                 _request.CreateRequest(donation);
 
-                MailRequestDTO mailRequest = new MailRequestDTO();
-
-                mailRequest.ToEmail = donorEmail;
-                mailRequest.Subject = "Donation Request from Food Share Nerwork";
-                mailRequest.Body = $"We are writing to you notify you that there is a request for the food you donated<br/>" +
+                MailRequestDTO mailRequest = new MailRequestDTO
+                {
+                    ToEmail = donorEmail!,
+                    Subject = "Donation Request from Food Share Nerwork",
+                    Body = $"We are writing to you notify you that there is a request for the food you donated<br/>" +
                                     $"To accept or decline this request, please visit <a href='http://localhost:3000/request/{donation}' >here</a> <br/><br/>" +
                                     $"Thank you for time and consideration. <br/><br/>" +
                                     $"Sincerely,<br/><br/>" +
-                                    $"Food Share Network";
+                                    $"Food Share Network"
+                };
+
+               
 
                 await _email.SendEmailAsync(mailRequest, email);
 
                 return Ok();
             }
-            catch (Exception ex)
+            catch (Exception )
             {
                 throw;
             }
 
+        }
+        [HttpPost("ResetMail")]
+        public async Task <ActionResult> MailResetSender( string email)
+        {
+            var donorEmail = await _appDbContext.Donors
+                           .Where(e => e.DonorEmail == email)
+                           .Select(e => e.DonorEmail)
+                           .FirstOrDefaultAsync();
+
+            // Create and initialize MailRequestDTO using object initializer
+            var mailRequest = new MailRequestDTO
+            {
+                ToEmail = donorEmail!,
+                Subject = "Food Share Network Password Recovery",
+                Body = $"We're delighted that you're interested in Food Share Network.</br>" +
+                       $"Please click <a href='http://localhost:3000/forgot-password'>here</a> to reset your password <br/><br/>"
+            };
+
+            // Send the reset email
+            await _email.ResetDonor(mailRequest, email);
+
+            // Return a successful result
+            return Ok();
+        }
+
+        [HttpPut("ResetDonorPassword")]
+
+        public async Task <ActionResult> ResetPassword(string email, Donor donor)
+        {
+           var result = await _email.ResetPassword(email, donor);
+            return Ok();
         }
 
         [HttpPost("RecipientMail")]
@@ -126,7 +162,7 @@ namespace FoodShareAPI.Controllers
             // Create the recipient mail DTO
             RecipientMailDTO recipientMailDTO = new RecipientMailDTO
             {
-                ToEmail = email,
+                ToEmail = email!,
                 Subject = "Response to your request from Food Share Network",
                 Body = $"We are writing to notify you of the response to your request.<br/><br/>" +
                        $"Your request has been accepted. You have until <strong>{collectionDeadlineSast:MMMM dd, yyyy HH:mm:ss SAST}</strong> to collect the food.<br/><br/>" +
@@ -145,7 +181,7 @@ namespace FoodShareAPI.Controllers
             // Create the recipient mail DTO for declined status
             RecipientMailDTO recipientMailDTO = new RecipientMailDTO
             {
-                ToEmail = email,
+                ToEmail = email!,
                 Subject = "Response to your request from Food Share Network",
                 Body = $"We are writing to notify you of the response to your request.<br/><br/>" +
                        $"Your request has been declined."

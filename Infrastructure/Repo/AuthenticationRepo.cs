@@ -37,7 +37,7 @@ namespace Infrastructure.Repo
             var identity = new ClaimsIdentity(claims,"Custom");
             var pricipal = new ClaimsPrincipal(identity);
 
-            await _httpContextAccessor.HttpContext.SignInAsync(pricipal);
+            await _httpContextAccessor?.HttpContext?.SignInAsync(pricipal)!;
         }
 
 
@@ -48,7 +48,7 @@ namespace Infrastructure.Repo
         {
             // Retrieve user information from the database based on userId
             var user = await _appDbContext.Donors.FirstOrDefaultAsync(u => u.DonorId == donorId);
-            return user;
+            return user!;
         }
     }
 }

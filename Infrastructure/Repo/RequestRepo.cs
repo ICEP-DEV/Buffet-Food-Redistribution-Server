@@ -58,7 +58,7 @@ namespace Infrastructure.Repo
                     }
                 }
             }
-            catch (Exception ex)
+            catch (Exception )
             {
                
             }
@@ -199,7 +199,7 @@ namespace Infrastructure.Repo
 
         public async Task<List<DonationRequest>> GetDeclinedHistory()
         {
-            int recipientId;
+            //int recipientId;
 
 
             var declinedDonations = await _appDbContext.DonationRequests

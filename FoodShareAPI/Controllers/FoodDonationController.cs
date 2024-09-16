@@ -16,14 +16,14 @@ namespace FoodShareAPI.Controllers
     public class FoodDonationController : ControllerBase
     {
         private readonly IFoodDonation donation;
-        private readonly AppDbContext appDbContext;
+        private readonly AppDbContext _appDbContext;
         //private readonly IHttpContextAccessor httpContextAccessor;
         //
         //this.httpContextAccessor = httpContextAccessor;
         public FoodDonationController(IFoodDonation donation, AppDbContext appDbContext)
         {
             this.donation = donation;
-            this.appDbContext = appDbContext;
+            this._appDbContext = appDbContext;
 
         }
 
@@ -67,7 +67,7 @@ namespace FoodShareAPI.Controllers
 
                 return Ok(foodItems);
             }
-            catch (Exception ex)
+            catch (Exception )
             {
                 return StatusCode(500, "An error occurred while processing your request.");
             }

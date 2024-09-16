@@ -18,7 +18,7 @@ namespace FoodShareAPI.Controllers
         [HttpPost]
         public async Task<ActionResult<VerificationDTO>> VerifyOrganization(int regNo)
         {
-            var verify = await _verification.VerifyOrganization(regNo);
+            var verify = await _verification!.VerifyOrganization(regNo);
             return Ok(verify);
         }
     }

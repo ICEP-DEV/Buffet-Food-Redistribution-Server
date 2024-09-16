@@ -82,7 +82,7 @@ namespace FoodShareAPI.Controllers
                 // Return OK with the donor requests
                 return Ok(donorRequests);
             }
-            catch (Exception ex)
+            catch (Exception )
             {
                
                 return StatusCode(StatusCodes.Status500InternalServerError, "An error occurred while processing your request.");

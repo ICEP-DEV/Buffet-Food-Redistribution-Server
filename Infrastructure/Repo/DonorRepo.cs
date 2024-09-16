@@ -78,11 +78,11 @@ namespace Infrastructure.Repo
             return new RegistrationResponse(true, "Registration completed");
         }
 
-        public Task<Donor?> GetDonorByEmail(string email)
+        public Task<Donor> GetDonorByEmail(string email)
         {
             var result = appDbContext.Donors.FirstOrDefault(u => u.DonorEmail == email);
 
-            return Task.FromResult(result);
+            return Task.FromResult(result)!;
         }
 
         public async Task<List<Donor>> GetDonorListAsync()
@@ -147,7 +147,7 @@ namespace Infrastructure.Repo
         //Token
         private string GenerateJWTToken(Donor donor)
         {
-            var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["Jwt:Key"]));
+            var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["Jwt:Key"]!));
             var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
             var userClaims = new[]
             {
@@ -184,10 +184,10 @@ namespace Infrastructure.Repo
                 var DonorProfile = new Donor
                 {
                     DonorId = donorId,
-                    DonorName = Name,
-                    DonorEmail = Email,
-                    DonorPhoneNum = PhoneNum,
-                    DonorAddress = Address
+                    DonorName = Name!,
+                    DonorEmail = Email!,
+                    DonorPhoneNum = PhoneNum!,
+                    DonorAddress = Address!
                 };
 
                 return Task.FromResult(DonorProfile); // Wrap the result in a completed Task
@@ -195,7 +195,7 @@ namespace Infrastructure.Repo
             else
             {
                 
-                return Task.FromResult<Donor>(null); 
+                return Task.FromResult<Donor>(null!); 
             }
         }
 

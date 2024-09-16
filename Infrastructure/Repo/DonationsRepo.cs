@@ -31,7 +31,7 @@ namespace Infrastructure.Repo
 
         public void PopulateFoodDonations(FoodItem foodItems)
         {
-            var donorIdClaim = _httpContextAccessor.HttpContext.User.FindFirst("DonorId");
+            var donorIdClaim = _httpContextAccessor?.HttpContext?.User.FindFirst("DonorId");
 
             // Check if the claim exists and if its value can be parsed as an integer
             if (donorIdClaim != null && int.TryParse(donorIdClaim.Value, out int donorId))
@@ -64,8 +64,8 @@ namespace Infrastructure.Repo
         {
             try
             {
-                var donorIdClaim = _httpContextAccessor.HttpContext.User.FindFirst("DonorId");
-                var identity = _httpContextAccessor.HttpContext?.User?.Identity as ClaimsIdentity;
+                var donorIdClaim = _httpContextAccessor?.HttpContext?.User.FindFirst("DonorId");
+                var identity = _httpContextAccessor?.HttpContext?.User?.Identity as ClaimsIdentity;
 
                 if (donorIdClaim == null)
                 {
@@ -89,7 +89,7 @@ namespace Infrastructure.Repo
                                        {
                                            DonorId = donorId,
                                            ItemId = foodItem.Id,
-                                           Name = DonorName,
+                                           Name = DonorName!,
                                            Quantity = donation.Quantity,
                                            DateCooked = donation.DateCooked
                                        }).ToListAsync();
@@ -109,7 +109,7 @@ namespace Infrastructure.Repo
         public async Task<List<FoodItem>> DonorFood()
         {
             // Retrieve the donor ID from the claims
-            var donorIdClaim = _httpContextAccessor.HttpContext.User.FindFirst("DonorId");
+            var donorIdClaim = _httpContextAccessor?.HttpContext?.User.FindFirst("DonorId");
 
             if (donorIdClaim == null)
             {

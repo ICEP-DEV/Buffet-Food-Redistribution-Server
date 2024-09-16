@@ -88,12 +88,42 @@ namespace Infrastructure.Repo
                 throw;
             }
         }
+
+        public async Task ResetDonor(MailRequestDTO mail, string donorEmail)
+        {
+            try
+            {
+                //var dEmail = _appDbContext.Donors.FirstOrDefault(d => d.DonorEmail == donorEmail);
+
+                var email = new MimeMessage();
+                email.From.Add(MailboxAddress.Parse(_settings.Email));
+                email.To.Add(MailboxAddress.Parse(mail.ToEmail));
+                email.Subject = mail.Subject;
+
+                var builder = new BodyBuilder();
+                builder.HtmlBody = mail.Body;
+
+                email.Body = builder.ToMessageBody();
+
+                using var smtp = new SmtpClient();
+                 await smtp.ConnectAsync(_settings.Host, _settings.Port, SecureSocketOptions.StartTls);
+                 await smtp.AuthenticateAsync(_settings.Email, _settings.Password);
+
+                 await smtp.SendAsync(email);
+                 await smtp.DisconnectAsync(true);
+            }
+            catch(Exception ex) 
+            {
+                Console.WriteLine($"Error sending email: {ex.Message}");
+                throw;
+            }
+        }
         public async Task<string?> GetDonorEmailFromDatabase(string email)
         {
             try
             {
                 var donor = await _appDbContext.Donors.FirstOrDefaultAsync(d => d.DonorEmail == email);
-                return donor.DonorEmail;
+                return donor!.DonorEmail;
             }
             catch (Exception ex)
             {
@@ -163,6 +193,30 @@ namespace Infrastructure.Repo
                 .FirstOrDefaultAsync();
 
             return donorEmail;
+        }
+
+        public async Task<string?> ResetPassword(string email, Donor donor)
+        {
+            var checkDonor = await FindUserByEmail(email);
+           
+
+            if (checkDonor != null)
+            {
+                var findDonor = await _appDbContext.Donors.FirstOrDefaultAsync(d => d.DonorEmail == email);
+                var reset = await _appDbContext.Donors.Where(d => d.DonorEmail == email).ExecuteUpdateAsync(
+                    setters => setters.SetProperty(u => u.Password, BCrypt.Net.BCrypt.HashPassword (donor.Password)));
+                return ("Update successful");
+            }
+            else
+            {
+                throw new Exception("User not found!");
+            }
+        }
+
+        private async Task<Donor?> FindUserByEmail(string email)
+        {
+            var donor = await _appDbContext.Donors.FirstOrDefaultAsync(u => u.DonorEmail == email);
+            return donor;  // Donor? indicates that Donor is nullable
         }
     }
 }
