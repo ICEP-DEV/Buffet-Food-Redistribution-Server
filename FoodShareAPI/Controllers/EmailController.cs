@@ -77,7 +77,7 @@ namespace FoodShareAPI.Controllers
                 ToEmail = donorEmail!,
                 Subject = "Food Share Network Password Recovery",
                 Body = $"We're delighted that you're interested in Food Share Network.</br>" +
-                       $"Please click <a href='http://localhost:3000/forgot-password'>here</a> to reset your password <br/><br/>"
+                       $"Please click <a href='http://localhost:3000/reset-password'>here</a> to reset your password <br/><br/>"
             };
 
             // Send the reset email

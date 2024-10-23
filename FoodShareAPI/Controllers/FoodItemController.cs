@@ -77,6 +77,15 @@ namespace FoodShareAPI.Controllers
 
         }
 
+        [HttpGet("Admin-Items")]
+
+        public async Task<IEnumerable> GetFoodAdmin()
+        {
+            var result = await _foodItem.GetItemsAsync();
+
+            return result;
+        }
+
         [HttpGet("TotalQuantity")]
 
         public async Task <IActionResult> GetTotalQuantity()

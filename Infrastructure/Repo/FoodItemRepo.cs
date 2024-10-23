@@ -44,5 +44,12 @@ namespace Infrastructure.Repo
                               .Where(fi => !fi.IsRequested) // Filter where IsRequested is false
                               .ToListAsync();
         }
+
+        public async Task<IEnumerable<FoodItem>> GetItemsAsync()
+        {
+            return await _appDbContext.FoodItems
+                             .Where(fi => fi.IsRequested) 
+                             .ToListAsync();
+        }
     }
 }

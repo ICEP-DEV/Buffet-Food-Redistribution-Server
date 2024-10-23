@@ -133,10 +133,10 @@ namespace Infrastructure.Repo
             
         }
 
-        public async Task<string?> GetRecipientEmail(int requestId)
+        public async Task<string?> GetRecipientEmail(int donationId)
         {
             
-            var recipientId = await _request.GetRecipientIdForDonationRequestAsync(requestId);
+            var recipientId = await _request.GetRecipientIdForDonationRequestAsync(donationId);
 
             if (recipientId.HasValue)
             {
@@ -150,14 +150,14 @@ namespace Infrastructure.Repo
             return null; 
         }
 
-    public async Task<string> GetRecipientInfo(int requestId)
+    public async Task<string> GetRecipientInfo(int donationId)
 {
     var donationRequest = await _appDbContext.DonationRequests
-                                            .FirstOrDefaultAsync(dr => dr.RequestId == requestId);
+                                            .FirstOrDefaultAsync(dr => dr.DonationId == donationId);
 
     if (donationRequest == null)
     {
-        throw new InvalidOperationException($"Donation request with ID {requestId} not found.");
+        throw new InvalidOperationException($"Donation request with ID {donationId} not found.");
     }
 
     var recipient = await _appDbContext.Recipients

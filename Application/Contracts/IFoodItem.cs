@@ -15,7 +15,7 @@ namespace Application.Contracts
         Task<IEnumerable<FoodItem>> GetFoodItemsAsync();
 
         Task<int> GetTotalQuantity();
-
+        Task <IEnumerable<FoodItem>> GetItemsAsync();
       
  
         //Task<int> DeleteItemAsync(int id);

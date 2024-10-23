@@ -64,11 +64,11 @@ namespace Infrastructure.Repo
             }
         }
 
-        public void UpdateDonationRequestStatus(int donationRequestId, string newStatus)
+        public void UpdateDonationRequestStatus(int donationId, string newStatus)
         {
             // Retrieve the donation request
             var donationRequest = _appDbContext.DonationRequests
-                .FirstOrDefault(dr => dr.RequestId == donationRequestId);
+                .FirstOrDefault(dr => dr.DonationId == donationId);
 
             if (donationRequest != null)
             {
@@ -81,7 +81,7 @@ namespace Infrastructure.Repo
                 {
                     // Find all related FoodItems (assuming you have a relationship or a way to get related items)
                     var foodItems = _appDbContext.FoodItems
-                        .Where(fi => fi.Id == donationRequestId) // Adjust this as necessary
+                        .Where(fi => fi.Id == donationId) // Adjust this as necessary
                         .ToList();
 
                     foreach (var foodItem in foodItems)
@@ -96,10 +96,10 @@ namespace Infrastructure.Repo
             }
         }
 
-        public void UpdateCollectionStatus(int donationRequestId)
+        public void UpdateCollectionStatus(int donationId)
         {
             var donationRequest = _appDbContext.DonationRequests
-                .FirstOrDefault(dr => dr.RequestId == donationRequestId);
+                .FirstOrDefault(dr => dr.DonationId == donationId);
 
             if (donationRequest != null)
             {
@@ -160,16 +160,16 @@ namespace Infrastructure.Repo
             return requestId != null ? requestId.RequestId : (int?) null;
         }
 
-        public async Task<int?> GetRecipientIdForDonationRequestAsync(int requestId)
+        public async Task<int?> GetRecipientIdForDonationRequestAsync(int donationId)
         {
             var request = await _appDbContext.DonationRequests
-                                             .FirstOrDefaultAsync(dr => dr.RequestId == requestId);
+                                             .FirstOrDefaultAsync(dr => dr.DonationId == donationId);
             return request != null ? request.RecipientId : (int?)null;
         }
 
         public async Task<string> GetRequestStatus(int requestId)
         {
-            var donationRequest = await _appDbContext.DonationRequests.FirstOrDefaultAsync(dr => dr.RequestId == requestId);
+            var donationRequest = await _appDbContext.DonationRequests.FirstOrDefaultAsync(dr => dr.DonationId == requestId);
 
             if (donationRequest != null)
             {
